@@ -1,0 +1,27 @@
+ body{
+        font-family:roboto;
+        line-height: 1.5;
+        text-align: center;
+        font-size: medium;
+      }
+      table{
+       border-collapse:collapse;
+
+      }
+       th,td{
+       padding:10px;
+       border:1px solid black;
+       }
+      img{
+        border-radius:50%;
+        width:300px;
+        height:300px;
+        display: block;
+      }
+      .margin{
+        margin:auto;
+        padding: 15px;
+      }
+      .color{
+        color:blue;
+      } 
