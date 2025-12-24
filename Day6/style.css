@@ -1,0 +1,28 @@
+.layout {
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    background-color: white;
+    padding: 20px;
+}    
+    
+    @media (max-width: 991px) {
+    .layout {
+        grid-template-columns: 1fr 1fr;
+      background-color: lightgreen;
+    }        
+}  
+  
+        @media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+    background-color: lightblue;
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+ 
+.hero {
+  animation: fadeIn 0.5s ease;
+}
