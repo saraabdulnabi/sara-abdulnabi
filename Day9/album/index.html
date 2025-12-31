@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta
+      name="author"
+      content="Mark Otto, Jacob Thornton, and Bootstrap contributors"
+    />
+    <meta name="generator" content="Astro v5.13.2" />
+    <title>Album example · Bootstrap v5.3</title>
+    <link
+      rel="canonical"
+      href="https://getbootstrap.com/docs/5.3/examples/album/"
+    />
+    <script src="../assets/js/color-modes.js"></script>
+    <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="../assets/dist/css/style.css" rel="stylesheet" />
+
+    <meta name="theme-color" content="#712cf9" />
+
+  </head>
+  <body>
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+        <path
+          d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+        ></path>
+      </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+        <path
+          d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+        ></path>
+      </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+        <path
+          d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+        ></path>
+        <path
+          d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+        ></path>
+      </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+        <path
+          d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+        ></path>
+      </symbol>
+    </svg>
+    <div
+      class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"
+    >
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Toggle theme (auto)"
+      >
+        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+          <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+      </button>
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text"
+      >
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#sun-fill"></use>
+            </svg>
+            Light
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#moon-stars-fill"></use>
+            </svg>
+            Dark
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#circle-half"></use>
+            </svg>
+            Auto
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <header data-bs-theme="dark">
+      <div class="collapse text-bg-dark" id="navbarHeader">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8 col-md-7 py-4">
+              <h4>About Lebanon</h4>
+              <p class="text-body-secondary">
+              Lebanon, officially the Republic of Lebanon,[d] is a country in the Levant region of West Asia. Situated at the crossroads of the Mediterranean Basin and the Arabian Peninsula,[14] it is bordered by Syria to the north and east, Israel to the south, and the Mediterranean Sea to the west; Cyprus lies a short distance from the coastline. Lebanon has a population of more than five million and an area of 10,452 square kilometres (4,036 sq mi). Beirut is the country's capital and largest city.
+              </p>
+            </div>
+            <div class="col-sm-4 offset-md-1 py-4">
+              <h4>Contact</h4>
+              <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Follow on X</a></li>
+                <li><a href="#" class="text-white">Like on Facebook</a></li>
+                <li><a href="#" class="text-white">Email me</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar navbar-dark bg-dark shadow-sm">
+        <div class="container">
+          <a href="#" class="navbar-brand d-flex align-items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              aria-hidden="true"
+              class="me-2"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"
+              ></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+            <strong>Lebanon</strong>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarHeader"
+            aria-controls="navbarHeader"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+    <main>
+       <div class="video-container">
+               <video autoplay muted loop playsinline>
+                 <source src="https://videos.pexels.com/video-files/3292639/3292639-hd_1920_1080_30fps.mp4" type="video/mp4">
+                </video>
+               </div>
+      <section class="py-5 text-center container">
+        <div class="row py-lg-5"> 
+          <div class="col-lg-6 col-md-8 mx-auto"></div> 
+            <h1 class="fw-light">Lebanon</h1>
+            <p class="lead text-body-secondary">
+              Lebanon, officially the Republic of Lebanon,[d] is a country in the Levant region of West Asia. Situated at the crossroads of the Mediterranean Basin and the Arabian Peninsula,[14] it is bordered by Syria to the north and east, Israel to the south, and the Mediterranean Sea to the west; Cyprus lies a short distance from the coastline. Lebanon has a population of more than five million and an area of 10,452 square kilometres (4,036 sq mi). Beirut is the country's capital and largest city.
+            </p>
+            <p>
+              <a href="https://en.wikipedia.org/wiki/Lebanon" class="btn btn-danger my-2">Lebanon Wikipedia</a>
+              <a href="https://en.wikipedia.org/wiki/Natural_areas_in_Lebanon" class="btn btn-success my-2">Nature of Lebanon</a>
+            </p>
+          </div>
+        </div>
+      </section>
+      <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/1144376711/photo/flag-of-lebanon-at-byblos-castle.jpg?b=1&s=612x612&w=0&k=20&c=OtZ5mmNz6zOM1e5PnAiG4Tb5dCRGVur6VMU3EZeZryw="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Lebanon
+                  </text>
+                
+                <div class="card-body">
+                  <p class="card-text">
+                   Lebanon gained independence in 1943 and became a cultural and financial hub in the Middle East, known for its thriving arts scene, diverse population, and reputation as a bridge between the East and West..
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/461976569/photo/beirut-downtown-cityscape-mohammad-al-amin-mosque.jpg?b=1&s=612x612&w=0&k=20&c=p_i1R-P4rIwoI3HwHhf6QbqJ9KECUbbO-ZsdI7M8iTk="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Mohammad Al-Amin Mosque
+                  </text>
+               
+                <div class="card-body">
+                  <p class="card-text">
+                    The Mohammad Al-Amin Mosque (Arabic: جامع محمد الأمين), also referred to as the Blue Mosque, is a Sunni mosque, located in downtown Beirut, Lebanon.
+
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/1155130633/photo/beirut-aerial-view-in-beautiful-sunset.jpg?b=1&s=612x612&w=0&k=20&c=AmmvCBahTBGqn0UFABfzZwQlbkvzzUIvU1Co5n4pfUE="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Beirut
+                  </text>
+               
+                <div class="card-body">
+                  <p class="card-text">
+                    Beirut is Lebanon's vibrant capital and largest city, a historic port on the Mediterranean known as the "Paris of the Middle East" for its blend of modern and Ottoman architecture, bustling nightlife (Hamra, Achrafieh), rich cultural sites (National Museum), and significant financial hub, constantly rebuilding and showcasing resilience after conflicts, even facing major challenges like the devastating 2020 port explosion.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="data:image/jpeg;base64,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"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Tripoli
+                  </text>
+              
+                <div class="card-body">
+                  <p class="card-text">
+                    Tripoli is the largest city in northern Lebanon and the second-largest city in the country. Situated 81 km north of the capital Beirut, it is the capital of the North Governorate and the Tripoli District. Tripoli overlooks the eastern Mediterranean Sea, and it is the northernmost seaport in Lebanon
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://images.pexels.com/photos/3610377/pexels-photo-3610377.jpeg"
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Baalbek
+                  </text>
+              
+                <div class="card-body">
+                  <p class="card-text">
+                    Baalbek is a city located east of the Litani River in Lebanon's Beqaa Valley, about 67 km northeast of Beirut. It is the capital of Baalbek-Hermel Governorate. In 1998, the city had a population of 82,608.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                       explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/1186904273/photo/mediterranean-jbeil-port-lagoon-with-anchored-fishing-boats-biblos-lebanon.jpg?b=1&s=612x612&w=0&k=20&c=63OI-bQeITATANm_ENqRgODT4C4rU4kIzcRoBGlgQ3k="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Byblos
+                  </text>
+              
+                <div class="card-body">
+                  <p class="card-text">
+                    Byblos, also known as Jebeil, Jbeil or Jubayl, is an ancient city in the Keserwan-Jbeil Governorate of Lebanon. The area is believed to have been first settled between 8800 and 7000 BC and continuously inhabited since 5000 BC
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                       explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/638162844/photo/skynews.jpg?b=1&s=612x612&w=0&k=20&c=ItqcuL5XbwnBYWvMeBtON1O04dXdDZOlDQFyKHullw0="                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Jounieh
+                  </text>
+                
+                <div class="card-body">
+                  <p class="card-text">
+                    Located only 20 km north of Beirut, Jounieh is a coastal town with unique features. Ideally placed below a 550 meter mountainous promontory, it charms visitors with its landscape worthy of the most beautiful postcards. It even has a "U"-shaped bay, unique in the world.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                       explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/510199937/photo/sidon-sea-castle.jpg?b=1&s=612x612&w=0&k=20&c=bs6EdiLCKym0lQO_v_WSl-XHn74pInzuWeT4lH7RnR4="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Saida
+                  </text>
+                
+                <div class="card-body">
+                  <p class="card-text">
+                   Sidon, or Saida, is the third-largest city in Lebanon. It is located on the Mediterranean coast in the South Governorate, of which it is the capital. Tyre, to the south, and the Lebanese capital of Beirut, to the north, are each about 40 kilometres away.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                       explore more
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card shadow-sm">
+                <img
+                  aria-label="Placeholder: Thumbnail"
+                  class="bd-placeholder-img card-img-top"
+                  height="225"
+                  preserveAspectRatio="xMidYMid slice"
+                  role="img"
+                  width="100%"
+                  src="https://media.istockphoto.com/id/1169107227/photo/a-mosque-in-bekaa-valley-near-baalbek-lebanon.jpg?b=1&s=612x612&w=0&k=20&c=2XR_5nxRpuSityMIXnuDXsAQumKA1Rzb81dCe_LO0c0="
+                >
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c"></rect>
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em">
+                    Beqaa
+                  </text>
+                <div class="card-body">
+                  <p class="card-text">
+                    The Beqaa Valley is a fertile valley in eastern Lebanon and its most important farming region. Industry, especially the country's agricultural industry, also flourishes in Beqaa. The region broadly corresponds to the Coele-Syria of classical antiquity. The Beqaa is located about 30 km east of Beirut.
+                  </p>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="btn-group">
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                        View
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-sm btn-outline-secondary"
+                      >
+                       explore more
+                      </button>
+                    </div>
+                    <small class="text-body-secondary">9 mins</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="text-body-secondary py-5">
+      <div class="container">
+        <p class="float-end mb-1"><a href="#">Back to top</a></p>
+        <p class="mb-1">
+          Album example is &copy; Bootstrap, but please download and customize
+          it for yourself!
+        </p>
+        <p class="mb-0">
+          New to Bootstrap? <a href="/">Visit the homepage</a> or read our
+          <a href="../getting-started/introduction">getting started guide</a>.
+        </p>
+      </div>
+    </footer>
+    <script
+      src="../assets/dist/js/bootstrap.bundle.min.js"
+      class="astro-vvvwv3sm"
+    ></script>
+  </body>
+</html>
