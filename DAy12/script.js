@@ -1,5 +1,3 @@
-
-
 const navigationData = [
     { name: "Home", link: "#" },
     { name: "Courses", link: "#" },
@@ -31,33 +29,44 @@ const coursesData = [
     }
 ];
 
-
 const renderWebsite = () => {
-    // 1. Populate Navigation Links
-    const navContainer = document.querySelector('.navigation');
-    const navMarkup = navigationData.map(item => `
-        <a href="${item.link}">${item.name}</a>
-    `).join('');
-    navContainer.innerHTML = navMarkup;
+    const nav = document.querySelector('.navigation');
+    let markup = ""; 
+    
+    navigationData.forEach(item => {
+        markup += `<a href="${item.link}">${item.name}</a>`;
+    });
+    nav.innerHTML = markup;
 
-    // 2. Populate Course Cards
     const coursesContainer = document.querySelector('.container');
-    const coursesMarkup = coursesData.map(course => `
-        <div class="card">
-            <img src="${course.image}" alt="${course.alt}" width="30" height="30">
-            <p>${course.title} <br> (${course.subtitle})</p>
-        </div>
-    `).join('');
-    coursesContainer.innerHTML = coursesMarkup;
+    let courses = ""; 
+    
+    coursesData.forEach(course => {
+        courses += `
+            <div class="card">
+                <img src="${course.image}" alt="${course.alt}" width="30" height="30">
+                <p>${course.title} <br> (${course.subtitle})</p>
+            </div>
+        `;
+    });
+    coursesContainer.innerHTML = courses;
 };
 
-document.addEventListener('DOMContentLoaded', renderWebsite);
+document.addEventListener('DOMContentLoaded', () => {
+    renderWebsite();
 
+    const startBtn = document.querySelector('.start');
+    const viewBtn = document.querySelector('.view');
 
-document.querySelector('.start').addEventListener('click', () => {
-    alert('Welcome! Redirecting to the enrollment page...');
-});
+    if (startBtn) {
+        startBtn.addEventListener('click', () => {
+            alert('Welcome! Redirecting to the enrollment page...');
+        });
+    }
 
-document.querySelector('.view').addEventListener('click', () => {
-    console.log('Roadmaps section requested.');
+    if (viewBtn) {
+        viewBtn.addEventListener('click', () => {
+            console.log('Roadmaps section requested.');
+        });
+    }
 });
