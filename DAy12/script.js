@@ -9,61 +9,57 @@ const navigationData = [
 ];
 
 const coursesData = [
-    {
-        title: "Front-End",
-        subtitle: "Java Script",
-        image: "C:/Users/USER/Downloads/2.png",
-        alt: "Front-End Icon"
-    },
-    {
-        title: "Back-End",
-        subtitle: "Node.js",
-        image: "C:/Users/USER/Downloads/1.png",
-        alt: "Back-End Icon"
-    },
-    {
-        title: "BootCamp",
-        subtitle: "MERN Full-Stack",
-        image: "C:/Users/USER/Downloads/mern.jpg",
-        alt: "MERN Icon"
-    }
+    { title: "Front-End", subtitle: "Java Script", image: "img/two.png", alt: "Front-End Icon" },
+    { title: "Back-End", subtitle: "Node.js", image: "img/one.png", alt: "Back-End Icon" },
+    { title: "BootCamp", subtitle: "MERN Full-Stack", image: "img/mern.jpg", alt: "MERN Icon" }
 ];
 
-const renderWebsite = () => {
+const renderNav = () => {
     const nav = document.querySelector('.navigation');
     let markup = ""; 
-    
     navigationData.forEach(item => {
         markup += `<a href="${item.link}">${item.name}</a>`;
     });
     nav.innerHTML = markup;
+};
 
+const renderCourses = (dataToRender) => {
     const coursesContainer = document.querySelector('.container');
-    let courses = ""; 
+    let coursesMarkup = ""; 
     
-    coursesData.forEach(course => {
-        courses += `
+    dataToRender.forEach(course => {
+        coursesMarkup += `
             <div class="card">
                 <img src="${course.image}" alt="${course.alt}" width="30" height="30">
                 <p>${course.title} <br> (${course.subtitle})</p>
             </div>
         `;
     });
-    coursesContainer.innerHTML = courses;
+    coursesContainer.innerHTML = coursesMarkup || `<p style="color:white; font-weight:bold;">No courses found.</p>`;
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderWebsite();
+    renderNav();
+    renderCourses(coursesData);
+
+    const searchInput = document.getElementById('courseSearch');
+    searchInput.addEventListener('input', (e) => {
+        const term = e.target.value.toLowerCase();
+        const filtered = coursesData.filter(course => 
+            course.title.toLowerCase().includes(term) || 
+            course.subtitle.toLowerCase().includes(term)
+        );
+        renderCourses(filtered);
+    });
 
     const startBtn = document.querySelector('.start');
-    const viewBtn = document.querySelector('.view');
-
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             alert('Welcome! Redirecting to the enrollment page...');
         });
     }
 
+    const viewBtn = document.querySelector('.view');
     if (viewBtn) {
         viewBtn.addEventListener('click', () => {
             console.log('Roadmaps section requested.');
