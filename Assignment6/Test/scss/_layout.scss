@@ -1,0 +1,130 @@
+/* Header */
+.header {
+  @include flex(row, space-between, center, $space-2);
+  padding: $space-2 $space-3;
+  background: $color-white;
+  border-bottom: 1px solid $color-border;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+
+  /* Mobile: stack */
+  @include respond-min(0px) {
+    flex-wrap: wrap;
+  }
+
+  @include respond-min($bp-tablet) {
+    flex-wrap: nowrap;
+  }
+}
+
+.logo {
+  font-family: $font-heading;
+  letter-spacing: 0.5px;
+}
+
+.hero {
+  padding: $space-5 0;
+  background: linear-gradient(135deg, $color-dark, $color-primary, $color-secondary);
+  color: $color-white;
+  animation: fadeIn 0.6s ease;
+}
+.hero__grid {
+  display: grid;
+  gap: $space-4;
+
+  @include respond-min($bp-tablet) {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+  }
+}
+
+.hero__title {
+  font-family: $font-heading;
+  font-size: 2rem;
+
+  @include respond-min($bp-tablet) {
+    font-size: 2.4rem;
+  }
+}
+
+.hero__desc {
+  margin-top: $space-2;
+  line-height: 1.8;
+  max-width: 55ch;
+}
+
+.hero__actions {
+  margin-top: $space-3;
+  @include flex(row, flex-start, center, $space-2);
+  flex-wrap: wrap;
+}
+
+.hero__card {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.22);
+  border-radius: $radius;
+  padding: $space-3;
+
+  h3 {
+    font-family: $font-heading;
+    margin-bottom: $space-2;
+  }
+}
+
+/* Features */
+.features {
+  padding: $space-5 0;
+}
+
+.features__grid {
+  display: grid;
+  gap: $space-3;
+
+  @include respond-min($bp-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-min($bp-desktop) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* CTA */
+.cta {
+  padding: $space-5 0;
+}
+
+.cta__box {
+  background: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $radius;
+  padding: $space-4;
+  @include flex(row, space-between, center, $space-3);
+  flex-wrap: wrap;
+}
+
+/* Footer */
+.footer {
+  background: $color-primary;
+  color: $color-white;
+  padding: $space-4 0;
+}
+
+.footer__grid {
+  display: grid;
+  gap: $space-3;
+
+  @include respond-min($bp-tablet) {
+    grid-template-columns: 1.2fr 0.8fr 1fr;
+    align-items: start;
+  }
+}
+
+.footer__links {
+  @include flex(column, flex-start, flex-start, $space-1);
+}
+
+.logo--footer {
+  margin-bottom: $space-1;
+}

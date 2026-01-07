@@ -1,0 +1,38 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: $font-body;
+  background: $color-bg;
+  color: $color-primary;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img { max-width: 100%; display: block; }
+
+.container { @include container; }
+
+.muted { opacity: 0.8; }
+
+.list {
+  padding-inline-start: 18px;
+  line-height: 1.8;
+}
+
+.section-head {
+  margin-bottom: $space-3;
+
+  h2 {
+    font-family: $font-heading;
+    margin-bottom: $space-1;
+  }
+}
