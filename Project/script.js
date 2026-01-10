@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    /* =========================
-       1) Build Interactive Panel
-       ========================= */
+
     const coursesSection = document.querySelector("#courses .section-header");
 
     const panel = document.createElement("div");
@@ -24,9 +22,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const messageArea = document.getElementById("messageArea");
     const searchInput = document.getElementById("searchInput");
 
-    /* =========================
-       2) Input controls button
-       ========================= */
     nameInput.addEventListener("input", () => {
         if (nameInput.value.trim().length > 0) {
             actionButton.disabled = false;
@@ -37,18 +32,14 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    /* =========================
-       3) Button changes text
-       ========================= */
+
     actionButton.addEventListener("click", () => {
         const userName = nameInput.value.trim();
         messageArea.textContent = `Welcome, ${userName}! You are ready to learn.`;
         messageArea.classList.add("text-gradient");
     });
 
-    /* =========================
-       4) Reset button
-       ========================= */
+
     resetButton.addEventListener("click", () => {
         nameInput.value = "";
         searchInput.value = "";
@@ -61,9 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* =========================
-       5) Search courses by name
-       ========================= */
+  
     const courseCards = document.querySelectorAll(".course-card");
 
     searchInput.addEventListener("input", () => {
@@ -79,10 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* =========================
-       6) Highlight top score
-       (simulate scores)
-       ========================= */
     let highestScore = 0;
     let topCard = null;
 
@@ -100,3 +85,13 @@ document.addEventListener("DOMContentLoaded", () => {
         topCard.classList.add("top-score");
     }
 });
+const courseCards = document.querySelectorAll(".course-card");
+const firstCard = courseCards[0];
+
+if (firstCard) {
+    firstCard.style.border = "3px solid yellow";
+    firstCard.style.boxShadow = "0 0 15px rgba(221, 255, 0, 0.99)";
+    firstCard.style.transform = "scale(1.05)";
+    firstCard.style.transition = "all 0.3s ease";
+}
+
