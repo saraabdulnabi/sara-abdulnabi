@@ -92,7 +92,6 @@ if (firstCard) {
     firstCard.style.boxShadow = "0 0 15px rgba(221, 255, 0, 0.99)";
     firstCard.style.transform = "scale(1.05)";
 }
-
 const joinElements = document.querySelectorAll("a, button");
 
 joinElements.forEach(el => {

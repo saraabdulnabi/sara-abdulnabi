@@ -113,17 +113,17 @@
 
         <div class="mb-3">
             <label class="form-label">Email Address</label>
-            <input type="email" class="form-control" id="email" placeholder="Enter email">
+            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
         </div>
 
         <div class="mb-3">
             <label class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter password">
+            <input type="password" class="form-control" id="password" placeholder="Enter password" required>
         </div>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="remember">
+                <input class="form-check-input" type="checkbox" id="remember" required>
                 <label class="form-check-label" for="remember">Remember me</label>
             </div>
             <a href="#" style="font-size:13px;color:var(--accent);">Forgot password?</a>
@@ -146,15 +146,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const loginBtn = document.getElementById("loginBtn");
     const message = document.getElementById("loginMessage");
 
+    function setError(input) {
+        input.style.border = "2px solid red";
+    }
+
+    function clearError(input) {
+        input.style.border = "1px solid var(--secondary-dark)";
+    }
+
     loginBtn.addEventListener("click", (e) => {
         e.preventDefault();
 
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
+        // Reset borders first
+        clearError(emailInput);
+        clearError(passwordInput);
+
         if (email === "" || password === "") {
             message.textContent = "Please fill in all fields.";
             message.style.color = "red";
+
+            if (email === "") setError(emailInput);
+            if (password === "") setError(passwordInput);
             return;
         }
 
@@ -162,18 +177,24 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!emailPattern.test(email)) {
             message.textContent = "Enter a valid email address.";
             message.style.color = "red";
+            setError(emailInput);
             return;
         }
 
         if (password.length < 6) {
             message.textContent = "Password must be at least 6 characters.";
             message.style.color = "red";
+            setError(passwordInput);
             return;
         }
 
         message.textContent = "Login successful!";
         message.style.color = "green";
     });
+
+    // Remove red border while typing
+    emailInput.addEventListener("input", () => clearError(emailInput));
+    passwordInput.addEventListener("input", () => clearError(passwordInput));
 });
 </script>
 
