@@ -3,64 +3,696 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stack Academy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Stack Academy - Where Creativity Meets Code</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-lg  shadow-sm">
-             <img src="images/logo.png" width="60px" height="60px">
-            <div class="container">
-                <a class="navbar-brand fw-bold" href="#">Stack Academy</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Paths</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Courses</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Bootcamps</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
-                        <button class="btn btn-primary" type="submit">Get Started</button>
-                    </form>
+    <nav class="navbar navbar-expand-lg sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#paths">Paths</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#courses">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="btn btn-icon ms-2" aria-label="User Profile">
+                        <i class="fas fa-user"></i>
+                    </button>
+                    <button class="btn btn-icon ms-2" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
                 </div>
             </div>
-        </nav>
-    </header>
+        </div>
+    </nav>
 
-    <main class="container my-5">
-        <div class="row g-4"> <div class="col-12 col-md-6 col-lg-3">
-                <div class="card h-100 custom-card">
-                    <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg" class="card-img-top" alt="Course">
-                    <div class="card-body">
-                        <h5 class="card-title">Web Development</h5>
-                        <p class="card-text">Master HTML, CSS, and JavaScript from scratch.</p>
-                        <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="display-3 fw-bold mb-3">Stack Academy</h1>
+                    <h2 class="display-6 mb-4">Where Creativity Meets Code</h2>
+                    <div class="typewriter-container mb-4">
+                        <h3 class="typewriter-text">Code The Web :)<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Own The Stack !</h3>
+                    </div>
+                    
+                    <div class="hero-highlights mb-5">
+                        <p class="fs-5">
+                            <i class="fas fa-lightbulb me-2"></i>Turn ideas into code 
+                            <span class="separator mx-3">|</span>
+                            <i class="fas fa-graduation-cap me-2"></i>Go from learner to builder
+                        </p>
+                        <p class="fs-5">
+                            <i class="fas fa-rocket me-2"></i>Launch your career 
+                            <span class="separator mx-3">|</span>
+                            <i class="fas fa-code me-2"></i>Code with confidence
+                        </p>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="#paths" class="btn btn-primary btn-lg me-3 mb-3">
+                            Get Started <i class="fas fa-arrow-right ms-2"></i>
+                        </a>
+                        <a href="#courses" class="btn btn-outline-primary btn-lg mb-3">
+                            View Courses <i class="fas fa-book ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6 hero-image">
+                    <div class="code-animation">
+                        <div class="code-line"><span class="code-tag">&lt;div</span> <span class="code-attr">class</span>=<span class="code-value">"creative-coder"</span><span class="code-tag">&gt;</span></div>
+                        <div class="code-line indent-1"><span class="code-tag">&lt;h1&gt;</span>Hello World!<span class="code-tag">&lt;/h1&gt;</span></div>
+                        <div class="code-line indent-1"><span class="code-tag">&lt;p&gt;</span>Building the web, one line at a time.<span class="code-tag">&lt;/p&gt;</span></div>
+                        <div class="code-line"><span class="code-tag">&lt;/div&gt;</span></div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="card h-100 custom-card">
-                    <img src="https://media.istockphoto.com/id/1479759169/photo/data-science-and-big-data-technology-data-scientist-computing-analysing-and-visualizing.jpg?b=1&s=612x612&w=0&k=20&c=BtbSZHTN8m1MSDLg0xNDGE1eZEUuWPad926gJEunxV8=" class="card-img-top" alt="Course">
-                    <div class="card-body">
-                        <h5 class="card-title">Data Science</h5>
-                        <p class="card-text">Analyze data and build machine learning models.</p>
-                        <a href="#" class="btn btn-outline-primary w-100">Learn More</a>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <a href="#paths" class="scroll-link">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">
+            <i class="fas fa-code"></i>
+        </div>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Learning Paths Section -->
+    <section id="paths" class="paths-section section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Popular Learning Paths</h2>
+                <p class="section-subtitle">Choose your journey to become a web developer</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="path-card card h-100">
+                        <div class="card-icon">
+                            <i class="fas fa-desktop"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Frontend Development</h3>
+                            <div class="tech-stack mb-3">
+                                <strong>Technologies:</strong>
+                                <div class="tech-tags mt-2">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JavaScript</span>
+                                    <span class="tech-tag">React</span>
+                                </div>
+                            </div>
+                            <p class="card-text">
+                                The Frontend Path focuses on creating the visual part of websites.
+                                Learn to design layouts, style pages, and build interactive user interfaces.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn path-btn">Explore Path <i class="fas fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="path-card card h-100">
+                        <div class="card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Backend Development</h3>
+                            <div class="tech-stack mb-3">
+                                <strong>Technologies:</strong>
+                                <div class="tech-tags mt-2">
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">Express</span>
+                                    <span class="tech-tag">Databases</span>
+                                    <span class="tech-tag">APIs</span>
+                                </div>
+                            </div>
+                            <p class="card-text">
+                                The Backend Path teaches how websites work behind the scenes.
+                                Learn to manage data, create APIs, and build server-side applications.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn path-btn">Explore Path <i class="fas fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="path-card card h-100">
+                        <div class="card-icon">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title">Full Stack Path</h3>
+                            <div class="tech-stack mb-3">
+                                <strong>Technologies:</strong>
+                                <div class="tech-tags mt-2">
+                                    <span class="tech-tag">Frontend</span>
+                                    <span class="tech-tag">Backend</span>
+                                    <span class="tech-tag">Databases</span>
+                                    <span class="tech-tag">DevOps</span>
+                                </div>
+                            </div>
+                            <p class="card-text">
+                                The Full Stack Path helps you build complete web applications by combining frontend and backend development skills.
+                            </p>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn path-btn">Explore Path <i class="fas fa-arrow-right ms-2"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            </div>
-    </main>
+        </div>
+    </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">
+            <i class="fas fa-laptop-code"></i>
+        </div>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Courses Section -->
+    <section id="courses" class="courses-section section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Our Popular Courses</h2>
+                <p class="section-subtitle">Learn industry-relevant technologies with step-by-step guidance</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <h4>HTML & CSS</h4>
+                        <p>Master the building blocks of the web</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 6 Weeks
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <h4>JavaScript</h4>
+                        <p>Bring interactivity to your websites</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 8 Weeks
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <h4>React</h4>
+                        <p>Build modern user interfaces</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 10 Weeks
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fab fa-angular"></i>
+                        </div>
+                        <h4>Angular</h4>
+                        <p>Enterprise-grade web applications</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 12 Weeks
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fab fa-node-js"></i>
+                        </div>
+                        <h4>Node.js</h4>
+                        <p>Server-side JavaScript development</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 10 Weeks
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="course-card">
+                        <div class="course-icon">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <h4>MongoDB</h4>
+                        <p>NoSQL database management</p>
+                        <div class="course-duration">
+                            <i class="far fa-clock me-1"></i> 6 Weeks
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-primary btn-lg">
+                    View All Courses <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="features-section section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Why Choose Stack Academy?</h2>
+                <p class="section-subtitle">Discover what makes us the best choice for your coding journey</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h3>Beginner Friendly</h3>
+                        <p>Easy explanations and step-by-step learning paths designed for absolute beginners.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-cubes"></i>
+                        </div>
+                        <h3>Framework Focused</h3>
+                        <p>Learn modern frameworks and tools used in real-world projects and job markets.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h3>Project Based</h3>
+                        <p>Build practical projects to strengthen your skills and build a professional portfolio.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>Expert Instructors</h3>
+                        <p>Learn from industry professionals with years of real-world development experience.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h3>Career Support</h3>
+                        <p>Get help with resume building, interview prep, and job placement assistance.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Community Access</h3>
+                        <p>Join a supportive community of learners and developers for collaboration and networking.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">
+            <i class="fas fa-concierge-bell"></i>
+        </div>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Services Section -->
+    <section id="services" class="services-section section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Our Services</h2>
+                <p class="section-subtitle">Comprehensive support for your learning journey</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-cube"></i>
+                        </div>
+                        <h4>Framework Training</h4>
+                        <p>Master popular frameworks like React, Angular, and Vue.js</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <h4>Project Guidance</h4>
+                        <p>Personalized guidance on building real-world applications</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <h4>Career Roadmap</h4>
+                        <p>Customized learning paths to achieve your career goals</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h4>Doubt Support</h4>
+                        <p>24/7 doubt resolution from experienced developers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Divider -->
+    <div class="section-divider">
+        <div class="divider-line"></div>
+        <div class="divider-icon">
+            <i class="fas fa-images"></i>
+        </div>
+        <div class="divider-line"></div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery-section section-padding">
+        <div class="container">
+            <div class="section-header text-center mb-5">
+                <h2 class="section-title">Projects & Learning Gallery</h2>
+                <p class="section-subtitle">Explore projects and designs created during learning</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-card">
+                        <div class="gallery-img">
+                            <i class="fas fa-laptop"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <h4>Web Layout</h4>
+                            <p>Responsive website design with modern CSS</p>
+                            <div class="gallery-tech">
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>Flexbox</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-card">
+                        <div class="gallery-img">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <h4>JS Logic</h4>
+                            <p>Interactive web application with JavaScript</p>
+                            <div class="gallery-tech">
+                                <span>JavaScript</span>
+                                <span>DOM</span>
+                                <span>ES6</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-card">
+                        <div class="gallery-img">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <h4>UI Design</h4>
+                            <p>Figma mockups for modern web applications</p>
+                            <div class="gallery-tech">
+                                <span>Figma</span>
+                                <span>UI/UX</span>
+                                <span>Wireframes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6">
+                    <div class="gallery-card">
+                        <div class="gallery-img">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="gallery-content">
+                            <h4>Clean Architecture</h4>
+                            <p>Well-structured code following best practices</p>
+                            <div class="gallery-tech">
+                                <span>MVC</span>
+                                <span>API</span>
+                                <span>Best Practices</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section section-padding">
+        <div class="container">
+            <div class="cta-content text-center">
+                <h2 class="cta-title mb-4">Start Your Full Stack Journey Today</h2>
+                <p class="cta-subtitle mb-5">Join Stack Academy and turn creativity into code. No prior experience needed.</p>
+                
+                <div class="cta-stats row justify-content-center mb-5">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <h3>2,500+</h3>
+                            <p>Students Trained</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <h3>98%</h3>
+                            <p>Job Placement Rate</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <h3>500+</h3>
+                            <p>Projects Built</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <h3>24/7</h3>
+                            <p>Support Available</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <a href="#contact" class="btn btn-primary btn-lg cta-button">
+                    Join Now <i class="fas fa-rocket ms-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="#home"><i class="fas fa-chevron-right me-2"></i>Home</a></li>
+                            <li><a href="#paths"><i class="fas fa-chevron-right me-2"></i>Paths</a></li>
+                            <li><a href="#courses"><i class="fas fa-chevron-right me-2"></i>Courses</a></li>
+                            <li><a href="#services"><i class="fas fa-chevron-right me-2"></i>Services</a></li>
+                            <li><a href="#about"><i class="fas fa-chevron-right me-2"></i>About</a></li>
+                            <li><a href="#contact"><i class="fas fa-chevron-right me-2"></i>Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="script.js"></script>
 </body>
 </html>
