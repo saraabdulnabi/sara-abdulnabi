@@ -11,16 +11,16 @@
     --light: #EEF1F8; /* Very Light Blue */
     --gray: #675F61; /* Gray */
     
-    /* Additional color variations */
     --pink-light: #F6A0AC;
     --pink-medium: #E47C9C;
-    --pink-dark: #D86897; /* From previous palette, close match */
+    --pink-dark: #D86897; 
     --blue-light: #A1C3E7;
     --blue-medium: #71C7FE;
     --purple-light: #908DCE;
     --purple-medium: #D99BD8;
     --purple-dark: #908DCE;
     
+
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
     --spacing-md: 2rem;
