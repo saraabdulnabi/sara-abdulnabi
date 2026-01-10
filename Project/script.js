@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="btn btn-primary me-2" id="actionButton" disabled>Click Me</button>
         <button class="btn btn-outline-primary" id="resetButton">Reset</button>
         <p class="mt-3" id="messageArea">Waiting for input...</p>
-
         <input type="text" class="form-control mt-4" id="searchInput" placeholder="Search course by name..." />
     `;
 
@@ -94,3 +93,18 @@ if (firstCard) {
     firstCard.style.transform = "scale(1.05)";
 }
 
+const joinElements = document.querySelectorAll("a, button");
+
+joinElements.forEach(el => {
+    if (el.textContent.toLowerCase().includes("join")) {
+        el.addEventListener("click", () => {
+            el.style.backgroundColor = "#4caf50";
+            el.style.color = "#fff";
+            el.style.border = "none";
+            el.style.boxShadow = "0 0 12px rgba(76, 175, 80, 0.8)";
+            el.style.transform = "scale(1.1)";
+            el.style.transition = "0.3s ease";
+            el.textContent = "Joined!";
+        });
+    }
+});
