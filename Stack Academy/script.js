@@ -30,28 +30,36 @@ document.addEventListener("DOMContentLoaded", () => {
             actionButton.classList.add("disabled");
         }
     });
-     function getData(name) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            if (name.length > 0) {
-                resolve(`Welcome, ${name}! You are ready to learn.`);
-            } else {
-                reject("Name cannot be empty!");
-            }
-        }, 2000); 
-    });
-}
-    actionButton.addEventListener("click", async () => {
-    const userName = nameInput.value.trim();
-    messageArea.textContent = "Loading...";
+    
+    async function fetchUserData() {
+    const url = "https://jsonplaceholder.typicode.com/users/1";
+
+    messageArea.textContent = "Loading data...";
+    messageArea.classList.remove("text-gradient");
+
     try {
-        const result = await getData(userName);
-        messageArea.textContent = result;
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("Failed to fetch data");
+        }
+
+        const data = await response.json();
+
+        messageArea.innerHTML = `
+            <strong>Name:</strong> ${data.name}<br>
+            <strong>Email:</strong> ${data.email}<br>
+            <strong>Phone:</strong> ${data.phone}
+        `;
         messageArea.classList.add("text-gradient");
+
     } catch (error) {
-        messageArea.textContent = error;
-        messageArea.classList.remove("text-gradient");
+        messageArea.textContent = "Error loading data. Please try again.";
     }
+}
+
+actionButton.addEventListener("click", () => {
+    fetchUserData();
 });
 
     resetButton.addEventListener("click", () => {

@@ -966,6 +966,7 @@ a {
 }
 
 .footer {
+     position: relative;
     background: linear-gradient(to bottom, var(--dark), #1a2530);
     color: white;
     padding-top: var(--spacing-xl);
@@ -1190,6 +1191,114 @@ img {
 
 @media (max-width: 400px) {
     .scroll-indicator {
+        display: none;
+    }
+}
+/* Section background themes (Hero & Footer remain unchanged) */
+
+#paths {
+    background: linear-gradient(
+        135deg,
+        rgba(228, 124, 156, 0.18),
+        rgba(246, 160, 172, 0.28)
+    );
+}
+
+#courses {
+    background: linear-gradient(
+        135deg,
+        rgba(113, 199, 254, 0.20),
+        rgba(161, 195, 231, 0.30)
+    );
+}
+
+#features {
+    background: linear-gradient(
+        135deg,
+        rgba(144, 141, 206, 0.20),
+        rgba(217, 155, 216, 0.30)
+    );
+}
+
+#services {
+    background: linear-gradient(
+        135deg,
+        rgba(228, 124, 156, 0.15),
+        rgba(113, 199, 254, 0.25)
+    );
+}
+
+#gallery {
+    background: linear-gradient(
+        135deg,
+        rgba(44, 62, 80, 0.10),
+        rgba(228, 124, 156, 0.20)
+    );
+}
+
+/* Last section before footer – brighter & airy */
+.cta-section {
+    background: linear-gradient(
+        135deg,
+        #fff0f6 0%,
+        #eaf6ff 100%
+    );
+    color: var(--dark);
+}
+
+.cta-section .cta-title,
+.cta-section .cta-subtitle,
+.cta-section p {
+    color: var(--dark);
+}
+
+.cta-section .stat-item h3 {
+    color: var(--primary);
+}
+
+.cta-section .stat-item p {
+    color: var(--gray);
+}
+/* Footer Back-To-Top Arrow */
+
+.footer {
+    position: relative;
+}
+
+.footer-scroll {
+    position: absolute;
+    top: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 20;
+}
+
+.footer-scroll .scroll-link {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.18); /* visible but not dark */
+    backdrop-filter: blur(6px);
+
+    color: #ffffff;
+    font-size: 1.5rem;
+    text-decoration: none;
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.footer-scroll .scroll-link:hover {
+    transform: scale(1.12);
+    background: rgba(255, 255, 255, 0.28);
+}
+
+@media (max-width: 400px) {
+    .footer-scroll {
         display: none;
     }
 }
