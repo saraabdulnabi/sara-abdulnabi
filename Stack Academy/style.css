@@ -357,32 +357,6 @@ a {
     color: var(--accent);
 }
 
-.scroll-indicator {
-    position: absolute;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.scroll-link {
-    display: block;
-    width: 50px;
-    height: 50px;
-    background: rgba(228, 124, 156, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--primary);
-    font-size: 1.5rem;
-    animation: bounce 2s infinite;
-    transition: all 0.3s ease;
-}
-
-.scroll-link:hover {
-    background: rgba(228, 124, 156, 0.3);
-    transform: scale(1.1);
-}
 
 @media (max-width: 992px) {
     .hero-content h1 {
@@ -1195,44 +1169,48 @@ img {
     }
 }
 /* Section background themes (Hero & Footer remain unchanged) */
-
 #paths {
-    background: linear-gradient(
+    background-color: rgba(228, 124, 156, 0.15); /* --primary with subtle opacity */
+    background-image: linear-gradient(
         135deg,
-        rgba(228, 124, 156, 0.18),
-        rgba(246, 160, 172, 0.28)
+        rgba(228, 124, 156, 0.2),
+        rgba(217, 155, 216, 0.15)
     );
 }
 
 #courses {
-    background: linear-gradient(
+    background-color: rgba(113, 199, 254, 0.15); /* --secondary with subtle opacity */
+    background-image: linear-gradient(
         135deg,
-        rgba(113, 199, 254, 0.20),
-        rgba(161, 195, 231, 0.30)
+        rgba(113, 199, 254, 0.2),
+        rgba(161, 195, 231, 0.15)
     );
 }
 
 #features {
-    background: linear-gradient(
+    background-color: rgba(144, 141, 206, 0.15); /* --accent with subtle opacity */
+    background-image: linear-gradient(
         135deg,
-        rgba(144, 141, 206, 0.20),
-        rgba(217, 155, 216, 0.30)
+        rgba(144, 141, 206, 0.2),
+        rgba(217, 155, 216, 0.15)
     );
 }
 
 #services {
-    background: linear-gradient(
+    background-color: rgba(228, 124, 156, 0.12); /* --primary with light opacity */
+    background-image: linear-gradient(
         135deg,
-        rgba(228, 124, 156, 0.15),
-        rgba(113, 199, 254, 0.25)
+        rgba(228, 124, 156, 0.17),
+        rgba(246, 160, 172, 0.12)
     );
 }
 
 #gallery {
-    background: linear-gradient(
+    background-color: rgba(44, 62, 80, 0.08); /* --dark with light opacity */
+    background-image: linear-gradient(
         135deg,
-        rgba(44, 62, 80, 0.10),
-        rgba(228, 124, 156, 0.20)
+        rgba(44, 62, 80, 0.12),
+        rgba(228, 124, 156, 0.08)
     );
 }
 
