@@ -1,112 +1,83 @@
 const Specification = require('../models/Specification');
 const Project = require('../models/Projects');
+const asyncHandler = require('../middleware/async.middleware');
 
 // CREATE a specification for a project
-const createSpecification = async (req, res) => {
-  try {
+const createSpecification = asyncHandler(async (req, res, next) => {
     const { projectId } = req.params;
-    
-    // Check if project exists
+
     const project = await Project.findById(projectId);
     if (!project) {
-      return res.status(404).json({
-        success: false,
-        message: 'Project not found'
-      });
+        const error = new Error('Project not found');
+        error.statusCode = 404;
+        return next(error);
     }
-    
-    // Create specification with projectId
+
     const specification = await Specification.create({
-      ...req.body,
-      projectId: projectId
+        ...req.body,
+        projectId
     });
-    
+
     res.status(201).json({
-      success: true,
-      data: specification,
-      message: 'Specification created successfully'
+        success: true,
+        data: specification,
+        message: 'Specification created successfully'
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+});
+
 
 // GET all specifications for a project
-const getProjectSpecifications = async (req, res) => {
-  try {
-    const specifications = await Specification.find({ 
-      projectId: req.params.projectId 
+const getProjectSpecifications = asyncHandler(async (req, res) => {
+    const specifications = await Specification.find({
+        projectId: req.params.projectId
     }).sort('-priority createdAt');
-    
+
     res.json({
-      success: true,
-      count: specifications.length,
-      data: specifications,
-      message: 'Specifications retrieved successfully'
+        success: true,
+        count: specifications.length,
+        data: specifications,
+        message: 'Specifications retrieved successfully'
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+});
 
 // UPDATE a specification
-const updateSpecification = async (req, res) => {
-  try {
+const updateSpecification = asyncHandler(async (req, res, next) => {
     const specification = await Specification.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true, runValidators: true }
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
     );
-    
+
     if (!specification) {
-      return res.status(404).json({
-        success: false,
-        message: 'Specification not found'
-      });
+        const error = new Error('Specification not found');
+        error.statusCode = 404;
+        return next(error);
     }
-    
+
     res.json({
-      success: true,
-      data: specification,
-      message: 'Specification updated successfully'
+        success: true,
+        data: specification,
+        message: 'Specification updated successfully'
     });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+});
+
 
 // DELETE a specification
-const deleteSpecification = async (req, res) => {
-  try {
+const deleteSpecification = asyncHandler(async (req, res, next) => {
     const specification = await Specification.findByIdAndDelete(req.params.id);
-    
+
     if (!specification) {
-      return res.status(404).json({
-        success: false,
-        message: 'Specification not found'
-      });
+        const error = new Error('Specification not found');
+        error.statusCode = 404;
+        return next(error);
     }
-    
+
     res.json({
-      success: true,
-      message: 'Specification deleted successfully'
+        success: true,
+        message: 'Specification deleted successfully'
     });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message
-    });
-  }
-};
+});
+
 
 module.exports = {
   createSpecification,

@@ -10,6 +10,7 @@ const {
     debugSingleProject,
 } = require('../controllers/projectController');
 
+// Make sure all these functions exist in your controller
 router.get('/debug/:id', debugSingleProject);
 router.post('/', createProject);
 router.get('/', getAllProjects);

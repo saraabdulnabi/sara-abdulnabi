@@ -1,140 +1,136 @@
 const mongoose = require('mongoose');
 const Project = require('../models/Projects');
 const Specification = require('../models/Specification');
+const asyncHandler = require('../middleware/async.middleware');
 
-const createProject = async (req, res) => {
-    try {
-        const project = await Project.create(req.body);
-        return res.status(201).json({
-            success: true,
-            data: project,
-            message: 'Project created successfully'
-        });
-    } catch (error) {
-        return res.status(400).json({ success: false, message: error.message });
+// CREATE a new project
+const createProject = asyncHandler(async (req, res) => {
+    const project = await Project.create(req.body);
+
+    res.status(201).json({
+        success: true,
+        data: project,
+        message: 'Project created successfully'
+    });
+});
+
+
+// GET all projects
+const getAllProjects = asyncHandler(async (_req, res) => {
+    const projects = await Project.find()
+        .populate('specifications')
+        .populate('technologies')
+        .sort('-createdAt');
+
+    res.json({
+        success: true,
+        count: projects.length,
+        data: projects,
+        message: 'Projects retrieved successfully'
+    });
+});
+
+
+// GET single project by ID
+const getProjectById = asyncHandler(async (req, res, next) => {
+    const project = await Project.findById(req.params.id)
+        .populate('specifications')
+        .populate('technologies');
+
+    if (!project) {
+        const error = new Error('Project not found');
+        error.statusCode = 404;
+        return next(error);
     }
-};
 
-const getAllProjects = async (_req, res) => {
-    try {
-        const projects = await Project.find()
-            .populate('specifications')
-            .sort('-createdAt');
+    res.json({
+        success: true,
+        data: project,
+        message: 'Project retrieved successfully'
+    });
+});
 
-        return res.json({
-            success: true,
-            count: projects.length,
-            data: projects,
-            message: 'Projects retrieved successfully'
-        });
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+
+// UPDATE a project
+const updateProject = asyncHandler(async (req, res, next) => {
+    const project = await Project.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true, runValidators: true }
+    ).populate('specifications')
+     .populate('technologies');
+
+    if (!project) {
+        const error = new Error('Project not found');
+        error.statusCode = 404;
+        return next(error);
     }
-};
 
-const getProjectById = async (req, res) => {
-    try {
-        const project = await Project.findById(req.params.id).populate('specifications');
+    res.json({
+        success: true,
+        data: project,
+        message: 'Project updated successfully'
+    });
+});
 
-        if (!project) {
-            return res.status(404).json({ success: false, message: 'Project not found' });
-        }
 
-        return res.json({
-            success: true,
-            data: project,
-            message: 'Project retrieved successfully'
-        });
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+// DELETE a project
+const deleteProject = asyncHandler(async (req, res, next) => {
+    const project = await Project.findById(req.params.id);
+
+    if (!project) {
+        const error = new Error('Project not found');
+        error.statusCode = 404;
+        return next(error);
     }
-};
 
-const updateProject = async (req, res) => {
-    try {
-        const project = await Project.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true, runValidators: true }
+    await Specification.deleteMany({ projectId: req.params.id });
+
+    if (project.technologies?.length > 0) {
+        await mongoose.model('Technology').updateMany(
+            { _id: { $in: project.technologies } },
+            { $pull: { projects: project._id } }
         );
-
-        if (!project) {
-            return res.status(404).json({ success: false, message: 'Project not found' });
-        }
-
-        return res.json({
-            success: true,
-            data: project,
-            message: 'Project updated successfully'
-        });
-    } catch (error) {
-        return res.status(400).json({ success: false, message: error.message });
     }
-};
 
-const deleteProject = async (req, res) => {
-    try {
-        const project = await Project.findById(req.params.id);
+    await project.deleteOne();
 
-        if (!project) {
-            return res.status(404).json({ success: false, message: 'Project not found' });
-        }
+    res.json({
+        success: true,
+        message: 'Project and its specifications deleted successfully'
+    });
+});
 
-        await Specification.deleteMany({ projectId: req.params.id });
-        await project.deleteOne();
+// DEBUG - Check single project
+const debugSingleProject = asyncHandler(async (req, res, next) => {
+    const project = await Project.findById(req.params.id);
 
-        return res.json({
-            success: true,
-            message: 'Project and its specifications deleted successfully'
-        });
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
+    if (!project) {
+        const error = new Error('Project not found');
+        error.statusCode = 404;
+        return next(error);
     }
-};
 
-// Debug route controller
-const debugSingleProject = async (req, res) => {
-    try {
-        const { id } = req.params;
+    const specifications = await Specification.find({ projectId: req.params.id });
 
-        const isValidId = mongoose.Types.ObjectId.isValid(id);
-        if (!isValidId) {
-            return res.status(400).json({
-                success: false,
-                message: "Invalid MongoDB ObjectId format"
-            });
+    res.json({
+        success: true,
+        message: "Project is valid",
+        data: {
+            projectId: project._id,
+            title: project.title,
+            specsCount: specifications.length
         }
+    });
+});
 
-        const project = await Project.findById(id);
-        if (!project) {
-            return res.status(404).json({
-                success: false,
-                message: "Project not found in DB"
-            });
-        }
 
-        const specifications = await Specification.find({ projectId: id });
-
-        return res.json({
-            success: true,
-            message: "Project is valid",
-            data: {
-                projectId: project._id,
-                title: project.title,
-                specsCount: specifications.length
-            }
-        });
-
-    } catch (error) {
-        return res.status(500).json({ success: false, message: error.message });
-    }
-};
-
+// EXPORT all functions
 module.exports = {
     createProject,
     getAllProjects,
     getProjectById,
-    updateProject,
+    updateProject,      // This was missing!
     deleteProject,
     debugSingleProject,
 };

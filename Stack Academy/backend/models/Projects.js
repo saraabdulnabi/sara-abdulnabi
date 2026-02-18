@@ -26,8 +26,8 @@ const projectSchema = new mongoose.Schema({
     default: 'active'
   },
   technologies: [{
-    type: String,
-    trim: true
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Technology'
   }],
   githubUrl: String,
   liveUrl: String
