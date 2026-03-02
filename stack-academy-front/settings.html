@@ -1,0 +1,1520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Manage your Stack Academy account settings, preferences, and security options.">
+    <meta name="keywords" content="Settings, Account Settings, Preferences, Stack Academy">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 40px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            position: relative;
+        }
+
+        /* Settings Container */
+        .settings-container {
+            padding: 40px 0 60px;
+        }
+
+        .settings-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+
+        /* Settings Sidebar */
+        .settings-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .settings-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .settings-nav-item {
+            margin-bottom: 5px;
+        }
+
+        .settings-nav-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            border-radius: 12px;
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .settings-nav-link i {
+            width: 20px;
+            color: var(--gray);
+        }
+
+        .settings-nav-link:hover {
+            background: rgba(228, 124, 156, 0.1);
+            color: var(--primary);
+        }
+
+        .settings-nav-link:hover i {
+            color: var(--primary);
+        }
+
+        .settings-nav-item.active .settings-nav-link {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .settings-nav-item.active .settings-nav-link i {
+            color: white;
+        }
+
+        /* Settings Content */
+        .settings-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .settings-section {
+            display: none;
+        }
+
+        .settings-section.active {
+            display: block;
+        }
+
+        .settings-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .settings-section-header h2 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .settings-section-header h2 i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 124, 156, 0.1);
+        }
+
+        .form-control.is-invalid {
+            border-color: #dc3545;
+        }
+
+        .invalid-feedback {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .form-text {
+            font-size: 12px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        /* Toggle Switch */
+        .toggle-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .toggle-item:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .toggle-info p {
+            font-size: 13px;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .3s;
+            border-radius: 34px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 20px;
+            width: 20px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Avatar Upload */
+        .avatar-upload {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .avatar-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-light);
+            object-fit: cover;
+        }
+
+        .avatar-upload-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .avatar-upload-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .avatar-upload-info {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        /* Save Button */
+        .save-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .save-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .save-btn i {
+            margin-right: 8px;
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            background: rgba(220, 53, 69, 0.05);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid rgba(220, 53, 69, 0.2);
+        }
+
+        .danger-zone h3 {
+            color: #dc3545;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .danger-zone p {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .delete-btn {
+            background: transparent;
+            border: 2px solid #dc3545;
+            color: #dc3545;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .settings-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .settings-sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+            
+            .settings-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .settings-nav-item {
+                flex: 1;
+                min-width: 120px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .settings-content {
+                padding: 20px;
+            }
+            
+            .avatar-upload {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+            
+            .toggle-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item active" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Account Settings</h1>
+            <p>Manage your profile, preferences, and security settings</p>
+        </div>
+    </section>
+
+    <!-- Settings Container -->
+    <div class="settings-container">
+        <div class="container">
+            <div class="settings-wrapper">
+                <!-- Settings Sidebar -->
+                <div class="settings-sidebar">
+                    <ul class="settings-nav">
+                        <li class="settings-nav-item active">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('profile', event)">
+                                <i class="fas fa-user"></i>
+                                <span>Profile Information</span>
+                            </a>
+                        </li>
+                        <li class="settings-nav-item">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('account', event)">
+                                <i class="fas fa-lock"></i>
+                                <span>Account Security</span>
+                            </a>
+                        </li>
+                        <li class="settings-nav-item">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('notifications', event)">
+                                <i class="fas fa-bell"></i>
+                                <span>Notifications</span>
+                            </a>
+                        </li>
+                        <li class="settings-nav-item">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('privacy', event)">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Privacy & Data</span>
+                            </a>
+                        </li>
+                        <li class="settings-nav-item">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('billing', event)">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Billing & Payments</span>
+                            </a>
+                        </li>
+                        <li class="settings-nav-item">
+                            <a href="#" class="settings-nav-link" onclick="showSettingsSection('preferences', event)">
+                                <i class="fas fa-sliders-h"></i>
+                                <span>Preferences</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content">
+                    <!-- Profile Information Section -->
+                    <div id="profile-section" class="settings-section active">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-user"></i> Profile Information</h2>
+                        </div>
+
+                        <div class="avatar-upload">
+                            <img src="images/default-avatar.png" alt="Profile Avatar" class="avatar-preview" id="profileAvatarPreview">
+                            <div>
+                                <button class="avatar-upload-btn" onclick="uploadAvatar()">
+                                    <i class="fas fa-camera"></i> Change Photo
+                                </button>
+                                <p class="avatar-upload-info mt-2">
+                                    <i class="fas fa-info-circle"></i> JPG, PNG or GIF. Max 2MB.
+                                </p>
+                            </div>
+                        </div>
+
+                        <form id="profileForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>First Name</label>
+                                    <input type="text" class="form-control" id="firstName" value="Sarah" placeholder="Enter first name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name</label>
+                                    <input type="text" class="form-control" id="lastName" value="Abdulnabi" placeholder="Enter last name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" class="form-control" id="displayName" value="Sarah Abdulnabi" placeholder="How should we call you?">
+                                <small class="form-text">This will appear on your profile and certificates.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Username</label>
+                                <input type="text" class="form-control" id="username" value="sarah_abdulnabi" placeholder="Enter username">
+                                <small class="form-text">Your unique URL: stackacademy.com/@sarah_abdulnabi</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea class="form-control" id="bio" rows="3" placeholder="Tell us about yourself">Full Stack Developer Student passionate about building web applications and learning new technologies.</textarea>
+                                <small class="form-text">Maximum 160 characters.</small>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address</label>
+                                    <input type="email" class="form-control" id="email" value="sarah.abdulnabi@example.com" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" value="+962 79 123 4567" placeholder="Enter phone number">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    <select class="form-control" id="country">
+                                        <option value="Jordan" selected>Jordan</option>
+                                        <option value="UAE">United Arab Emirates</option>
+                                        <option value="Saudi">Saudi Arabia</option>
+                                        <option value="Egypt">Egypt</option>
+                                        <option value="Palestine">Palestine</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>City</label>
+                                    <input type="text" class="form-control" id="city" value="Amman" placeholder="Enter city">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input type="date" class="form-control" id="dob" value="1995-05-15">
+                            </div>
+
+                            <button type="submit" class="save-btn" onclick="saveProfile(event)">
+                                <i class="fas fa-save"></i> Save Changes
+                            </button>
+                        </form>
+
+                        <!-- Danger Zone -->
+                        <div class="danger-zone">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Danger Zone</h3>
+                            <p>Once you delete your account, there is no going back. Please be certain.</p>
+                            <button class="delete-btn" onclick="deleteAccount()">
+                                <i class="fas fa-trash-alt"></i> Delete Account
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Account Security Section -->
+                    <div id="account-section" class="settings-section">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-lock"></i> Account Security</h2>
+                        </div>
+
+                        <form>
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" class="form-control" placeholder="Enter current password">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>New Password</label>
+                                    <input type="password" class="form-control" placeholder="Enter new password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm New Password</label>
+                                    <input type="password" class="form-control" placeholder="Confirm new password">
+                                </div>
+                            </div>
+
+                            <div class="password-strength mt-2 mb-3">
+                                <div class="strength-bar" style="height: 4px; background: #e9ecef; border-radius: 2px;">
+                                    <div class="strength-bar-fill" style="height: 100%; width: 0%; background: var(--primary); border-radius: 2px;"></div>
+                                </div>
+                                <small class="form-text">Password strength: <span id="strengthText">Not entered</span></small>
+                            </div>
+
+                            <button type="submit" class="save-btn" onclick="changePassword(event)">
+                                <i class="fas fa-save"></i> Update Password
+                            </button>
+                        </form>
+
+                        <hr style="margin: 30px 0;">
+
+                        <h3 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 15px;">Two-Factor Authentication</h3>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Enable Two-Factor Authentication</h4>
+                                <p>Add an extra layer of security to your account.</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="twoFactor">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <h3 style="font-size: 1.1rem; font-weight: 600; margin: 30px 0 15px;">Active Sessions</h3>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Current Session</h4>
+                                <p>Amman, Jordan • Chrome on Windows</p>
+                            </div>
+                            <span style="color: #28a745; font-size: 13px; font-weight: 500;">Active Now</span>
+                        </div>
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Mobile App</h4>
+                                <p>iPhone 13 • Last active 2 days ago</p>
+                            </div>
+                            <button class="edit-btn" style="padding: 4px 12px;">Revoke</button>
+                        </div>
+                    </div>
+
+                    <!-- Notifications Section -->
+                    <div id="notifications-section" class="settings-section">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-bell"></i> Notification Settings</h2>
+                        </div>
+
+                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 15px;">Email Notifications</h3>
+                        
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Course Updates</h4>
+                                <p>Get notified when new content is added to your courses</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="courseUpdates">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Promotions & Offers</h4>
+                                <p>Receive special offers and discounts</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="promotions">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Weekly Digest</h4>
+                                <p>Get a weekly summary of your activity</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="weeklyDigest">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Achievement Alerts</h4>
+                                <p>Get notified when you earn badges or certificates</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="achievementAlerts">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <h3 style="font-size: 1rem; font-weight: 600; margin: 30px 0 15px;">Push Notifications</h3>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Mobile Push Notifications</h4>
+                                <p>Receive notifications on your mobile device</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="pushNotifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <button class="save-btn mt-4" onclick="saveNotifications(event)">
+                            <i class="fas fa-save"></i> Save Preferences
+                        </button>
+                    </div>
+
+                    <!-- Privacy & Data Section -->
+                    <div id="privacy-section" class="settings-section">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-shield-alt"></i> Privacy & Data</h2>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Profile Visibility</h4>
+                                <p>Make your profile visible to other students</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="profileVisibility">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Show Activity Status</h4>
+                                <p>Let others see when you're active</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="activityStatus">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Share Course Progress</h4>
+                                <p>Display your progress on public profile</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="shareProgress">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <h3 style="font-size: 1rem; font-weight: 600; margin: 30px 0 15px;">Data Management</h3>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Download Your Data</h4>
+                                <p>Get a copy of all your personal data</p>
+                            </div>
+                            <button class="edit-btn">Request Data</button>
+                        </div>
+
+                        <button class="save-btn mt-4" onclick="savePrivacy(event)">
+                            <i class="fas fa-save"></i> Save Privacy Settings
+                        </button>
+                    </div>
+
+                    <!-- Billing & Payments Section -->
+                    <div id="billing-section" class="settings-section">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-credit-card"></i> Billing & Payments</h2>
+                        </div>
+
+                        <div style="background: var(--light); border-radius: 16px; padding: 20px; margin-bottom: 25px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                                <h3 style="font-size: 1rem; font-weight: 600;">Current Plan: Pro Monthly</h3>
+                                <span style="background: var(--primary); color: white; padding: 4px 12px; border-radius: 30px; font-size: 12px; font-weight: 500;">Active</span>
+                            </div>
+                            <p style="color: var(--gray); font-size: 14px; margin-bottom: 15px;">Next billing: March 15, 2025</p>
+                            <button class="edit-btn">Change Plan</button>
+                            <button class="edit-btn" style="margin-left: 10px;">Cancel Subscription</button>
+                        </div>
+
+                        <h3 style="font-size: 1rem; font-weight: 600; margin-bottom: 15px;">Payment Methods</h3>
+
+                        <div style="display: flex; align-items: center; gap: 15px; padding: 15px; border: 1px solid #e9ecef; border-radius: 12px; margin-bottom: 15px;">
+                            <i class="fab fa-cc-visa" style="font-size: 2rem; color: #1a1f71;"></i>
+                            <div style="flex: 1;">
+                                <p style="font-weight: 500; margin-bottom: 3px;">Visa ending in 4242</p>
+                                <p style="font-size: 12px; color: var(--gray);">Expires 05/27</p>
+                            </div>
+                            <span style="background: #28a745; color: white; padding: 2px 8px; border-radius: 30px; font-size: 11px;">Default</span>
+                            <button class="edit-btn" style="padding: 4px 12px;">Edit</button>
+                        </div>
+
+                        <button class="edit-btn mb-4">
+                            <i class="fas fa-plus"></i> Add Payment Method
+                        </button>
+
+                        <h3 style="font-size: 1rem; font-weight: 600; margin: 25px 0 15px;">Billing History</h3>
+
+                        <div style="border: 1px solid #e9ecef; border-radius: 12px; overflow: hidden;">
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 15px; background: var(--light); font-weight: 600; font-size: 13px;">
+                                <div>Date</div>
+                                <div>Amount</div>
+                                <div>Status</div>
+                                <div>Invoice</div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 15px; border-top: 1px solid #e9ecef; font-size: 13px;">
+                                <div>Feb 15, 2025</div>
+                                <div>$49.99</div>
+                                <div><span style="color: #28a745;">Paid</span></div>
+                                <div><a href="#" style="color: var(--primary);">PDF</a></div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; padding: 12px 15px; border-top: 1px solid #e9ecef; font-size: 13px;">
+                                <div>Jan 15, 2025</div>
+                                <div>$49.99</div>
+                                <div><span style="color: #28a745;">Paid</span></div>
+                                <div><a href="#" style="color: var(--primary);">PDF</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Preferences Section -->
+                    <div id="preferences-section" class="settings-section">
+                        <div class="settings-section-header">
+                            <h2><i class="fas fa-sliders-h"></i> Preferences</h2>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Language</label>
+                            <select class="form-control">
+                                <option value="en" selected>English</option>
+                                <option value="ar">العربية</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Time Zone</label>
+                            <select class="form-control">
+                                <option value="AST" selected>(GMT+3) Amman, Jordan</option>
+                                <option value="GST">(GMT+4) Dubai, UAE</option>
+                                <option value="EET">(GMT+2) Cairo, Egypt</option>
+                                <option value="EST">(GMT-5) New York, USA</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Date Format</label>
+                            <select class="form-control">
+                                <option value="DMY" selected>DD/MM/YYYY</option>
+                                <option value="MDY">MM/DD/YYYY</option>
+                                <option value="YMD">YYYY/MM/DD</option>
+                            </select>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Dark Mode</h4>
+                                <p>Switch between light and dark theme</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="darkMode">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Auto-play Videos</h4>
+                                <p>Automatically play course videos</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" checked id="autoplay">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="toggle-item">
+                            <div class="toggle-info">
+                                <h4>Captions/Subtitles</h4>
+                                <p>Enable captions by default</p>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="captions">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+
+                        <button class="save-btn mt-4" onclick="savePreferences(event)">
+                            <i class="fas fa-save"></i> Save Preferences
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer - Exactly like index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#home" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (!token || !user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const userData = JSON.parse(user);
+                updateSettingsUI(userData);
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        });
+
+        // Update settings UI with user data
+        function updateSettingsUI(user) {
+            if (user.name) {
+                const nameParts = user.name.split(' ');
+                if (nameParts.length > 1) {
+                    document.getElementById('firstName').value = nameParts[0];
+                    document.getElementById('lastName').value = nameParts.slice(1).join(' ');
+                    document.getElementById('displayName').value = user.name;
+                } else {
+                    document.getElementById('displayName').value = user.name;
+                }
+            }
+            
+            if (user.email) {
+                document.getElementById('email').value = user.email;
+            }
+            
+            if (user.avatar) {
+                document.getElementById('profileAvatarPreview').src = user.avatar;
+                document.getElementById('navUserAvatar').src = user.avatar;
+            }
+            
+            if (user.phone) {
+                document.getElementById('phone').value = user.phone;
+            }
+            
+            if (user.bio) {
+                document.getElementById('bio').value = user.bio;
+            }
+            
+            if (user.country) {
+                document.getElementById('country').value = user.country;
+            }
+            
+            if (user.city) {
+                document.getElementById('city').value = user.city;
+            }
+        }
+
+        // Show settings section
+        function showSettingsSection(section, event) {
+            event.preventDefault();
+            
+            // Hide all sections
+            document.querySelectorAll('.settings-section').forEach(el => {
+                el.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(`${section}-section`).classList.add('active');
+            
+            // Update active nav item
+            document.querySelectorAll('.settings-nav-item').forEach(el => {
+                el.classList.remove('active');
+            });
+            event.target.closest('.settings-nav-item').classList.add('active');
+        }
+
+        // Save profile
+        function saveProfile(event) {
+            event.preventDefault();
+            
+            // Get form values
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const displayName = document.getElementById('displayName').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const bio = document.getElementById('bio').value;
+            const country = document.getElementById('country').value;
+            const city = document.getElementById('city').value;
+            
+            // Validate
+            if (!firstName || !lastName || !email) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            // Update user in localStorage (in real app, send to backend)
+            const userStr = localStorage.getItem('user');
+            if (userStr) {
+                const user = JSON.parse(userStr);
+                user.name = displayName || `${firstName} ${lastName}`;
+                user.email = email;
+                user.phone = phone;
+                user.bio = bio;
+                user.country = country;
+                user.city = city;
+                localStorage.setItem('user', JSON.stringify(user));
+            }
+            
+            alert('Profile updated successfully!');
+        }
+
+        // Change password
+        function changePassword(event) {
+            event.preventDefault();
+            alert('Password changed successfully!');
+        }
+
+        // Save notifications
+        function saveNotifications(event) {
+            event.preventDefault();
+            alert('Notification preferences saved!');
+        }
+
+        // Save privacy settings
+        function savePrivacy(event) {
+            event.preventDefault();
+            alert('Privacy settings saved!');
+        }
+
+        // Save preferences
+        function savePreferences(event) {
+            event.preventDefault();
+            alert('Preferences saved!');
+        }
+
+        // Upload avatar
+        function uploadAvatar() {
+            alert('Avatar upload functionality would open file picker');
+        }
+
+        // Delete account
+        function deleteAccount() {
+            if (confirm('Are you absolutely sure you want to delete your account? This action cannot be undone.')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

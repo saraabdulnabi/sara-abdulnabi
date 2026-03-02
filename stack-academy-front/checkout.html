@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete your purchase and start learning with Stack Academy courses.">
+    <meta name="keywords" content="Checkout, Payment, Purchase Courses, Stack Academy">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Checkout Section */
+        .checkout-section {
+            padding: 60px 0;
+        }
+
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        /* Checkout Form */
+        .checkout-form {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .form-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h3 i {
+            color: var(--primary);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 124, 156, 0.1);
+        }
+
+        /* Message Container */
+#messageContainer {
+    margin-bottom: 20px;
+}
+
+.alert {
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border: none;
+    animation: slideDown 0.3s ease;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.alert-success i {
+    color: white;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .payment-method {
+            flex: 1;
+            min-width: 120px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .payment-method:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-method.active {
+            border-color: var(--primary);
+            background: rgba(228, 124, 156, 0.05);
+        }
+
+        .payment-method i {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        .payment-method i.fa-credit-card { color: #1a1f71; }
+        .payment-method i.fa-paypal { color: #003087; }
+        .payment-method i.fa-apple-pay { color: #000; }
+
+        .payment-method span {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* Card Details */
+        .card-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .summary-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .summary-item-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .summary-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .summary-item-details {
+            flex: 1;
+        }
+
+        .summary-item-details h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .summary-item-details p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .summary-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+    
+
+        .summary-row.total span:last-child {
+            color: var(--primary);
+        }
+
+        .place-order-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 20px 0;
+        }
+
+        .place-order-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .secure-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .secure-checkout i {
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .order-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-details {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                flex-direction: column;
+            }
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartCount">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Checkout</h1>
+            <p>Complete your purchase and start learning</p>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section class="checkout-section">
+        <div class="container">
+            <div class="checkout-container">
+                <!-- Checkout Form -->
+                <div class="checkout-form">
+                    <!-- Message container for alerts -->
+                   <div id="messageContainer"></div>
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Contact Information</h3>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-control" placeholder="john.doe@example.com" value="john.doe@example.com">
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="newsletter">
+                            <label class="form-check-label" for="newsletter">
+                                Keep me updated on new courses and offers
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Billing Address -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-map-marker-alt"></i> Billing Address</h3>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="John" value="John">
+                            </div>
+                            <div class="form-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder="Doe" value="Doe">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" placeholder="Street address" value="123 Main St">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Apartment, suite, etc. (optional)</label>
+                            <input type="text" class="form-control" placeholder="Apt 4B">
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="City" value="Amman">
+                            </div>
+                            <div class="form-group">
+                                <label>State</label>
+                                <input type="text" class="form-control" placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>ZIP / Postal Code</label>
+                                <input type="text" class="form-control" placeholder="11181" value="11181">
+                            </div>
+                            <div class="form-group">
+                                <label>Country</label>
+                                <select class="form-control">
+                                    <option value="JO" selected>Jordan</option>
+                                    <option value="AE">United Arab Emirates</option>
+                                    <option value="SA">Saudi Arabia</option>
+                                    <option value="EG">Egypt</option>
+                                    <option value="PS">Palestine</option>
+                                    <option value="US">United States</option>
+                                    <option value="UK">United Kingdom</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-credit-card"></i> Payment Method</h3>
+                        
+                        <div class="payment-methods">
+                            <div class="payment-method active" onclick="selectPaymentMethod(this)">
+                                <i class="fas fa-credit-card"></i>
+                                <span>Credit Card</span>
+                            </div>
+                            <div class="payment-method" onclick="selectPaymentMethod(this)">
+                                <i class="fab fa-paypal"></i>
+                                <span>PayPal</span>
+                            </div>
+                            <div class="payment-method" onclick="selectPaymentMethod(this)">
+                                <i class="fab fa-apple-pay"></i>
+                                <span>Apple Pay</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Card Number</label>
+                            <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+                        </div>
+
+                        <div class="card-details">
+                            <div class="form-group">
+                                <label>Expiry Date</label>
+                                <input type="text" class="form-control" placeholder="MM/YY">
+                            </div>
+                            <div class="form-group">
+                                <label>CVV</label>
+                                <input type="text" class="form-control" placeholder="123">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Name on Card</label>
+                            <input type="text" class="form-control" placeholder="John Doe">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="order-summary">
+                    <h3 class="summary-title">Order Summary</h3>
+                    
+                    <div class="summary-item">
+                        <div class="summary-item-img">
+                            <img src="images/js.jpg" alt="JavaScript Course">
+                        </div>
+                        <div class="summary-item-details">
+                            <h4>The Complete JavaScript Course 2025</h4>
+                            <p>John Smith • 45 hours</p>
+                            <div class="summary-item-price">$49.99</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-item">
+                        <div class="summary-item-img">
+                            <img src="images/react.jpg" alt="React Course">
+                        </div>
+                        <div class="summary-item-details">
+                            <h4>React - The Complete Guide</h4>
+                            <p>Sarah Johnson • 52 hours</p>
+                            <div class="summary-item-price">$69.99</div>
+                        </div>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Subtotal</span>
+                        <span>$119.98</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Tax (10%)</span>
+                        <span>$12.00</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total</span>
+                        <span>$131.98</span>
+                    </div>
+
+                    <button class="place-order-btn" onclick="placeOrder()">
+                        <i class="fas fa-lock me-2"></i>Place Order
+                    </button>
+
+                    <div class="secure-checkout">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Secure SSL Encrypted</span>
+                        <i class="fas fa-lock"></i>
+                    </div>
+
+                    <div class="payment-methods-icons text-center mt-3">
+                        <i class="fab fa-cc-visa fa-2x me-2" style="color: #1a1f71;"></i>
+                        <i class="fab fa-cc-mastercard fa-2x me-2" style="color: #eb001b;"></i>
+                        <i class="fab fa-cc-amex fa-2x me-2" style="color: #2e77bb;"></i>
+                        <i class="fab fa-cc-paypal fa-2x" style="color: #003087;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#home" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (token && user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.avatar) {
+                        document.getElementById('navUserAvatar').src = userData.avatar;
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                }
+            }
+        });
+
+        // Select payment method
+        function selectPaymentMethod(element) {
+            document.querySelectorAll('.payment-method').forEach(el => {
+                el.classList.remove('active');
+            });
+            element.classList.add('active');
+        }
+
+  // Place order
+function placeOrder() {
+    // Show success message on screen
+    const messageContainer = document.getElementById('messageContainer');
+    if (messageContainer) {
+        messageContainer.innerHTML = `
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i>
+                Order placed successfully! Redirecting to dashboard...
+            </div>
+        `;
+    }
+
+    // Disable the place order button
+    const placeOrderBtn = document.querySelector('.place-order-btn');
+    if (placeOrderBtn) {
+        placeOrderBtn.disabled = true;
+        placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Processing...';
+    }
+
+    // Redirect to dashboard after delay
+    setTimeout(() => {
+        window.location.href = 'dashboard.html';
+    }, 2000);
+}
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

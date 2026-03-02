@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="View and manage your selected courses in the Stack Academy shopping cart.">
+    <meta name="keywords" content="Shopping Cart, Courses Cart, Checkout, Stack Academy">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Cart Section */
+        .cart-section {
+            padding: 60px 0;
+        }
+
+        .cart-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        /* Cart Items */
+        .cart-items {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .cart-header {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 0.5fr;
+            padding: 20px;
+            background: var(--light);
+            border-bottom: 1px solid #e9ecef;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 14px;
+        }
+
+        .cart-header span:last-child {
+            text-align: center;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 3fr 1fr 1fr 0.5fr;
+            padding: 20px;
+            border-bottom: 1px solid #e9ecef;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item:hover {
+            background: rgba(228, 124, 156, 0.02);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .item-details p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .item-instructor {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        .item-instructor i {
+            color: var(--primary);
+            font-size: 10px;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .quantity-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .quantity-value {
+            font-weight: 600;
+            color: var(--dark);
+            min-width: 20px;
+            text-align: center;
+        }
+
+        .item-total {
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .item-actions {
+            display: flex;
+            justify-content: center;
+        }
+
+        .remove-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid #dc3545;
+            background: transparent;
+            color: #dc3545;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .remove-btn:hover {
+            background: #dc3545;
+            color: white;
+        }
+
+        /* Cart Summary */
+        .cart-summary {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 100px;
+        }
+
+        .summary-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+            color: var(--dark);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+        }
+
+        .summary-row.total span:last-child {
+            color: var(--primary);
+        }
+
+        .promo-code {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .promo-code input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .promo-code input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 124, 156, 0.1);
+        }
+
+        .promo-code button {
+            background: var(--light);
+            border: 2px solid #e9ecef;
+            color: var(--gray);
+            padding: 0 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-code button:hover {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .secure-checkout {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .secure-checkout i {
+            color: var(--primary);
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .payment-methods img {
+            height: 30px;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+        }
+
+        .payment-methods img:hover {
+            opacity: 1;
+        }
+
+        /* Empty Cart */
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .empty-cart-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .empty-cart h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .empty-cart p {
+            color: var(--gray);
+            margin-bottom: 25px;
+        }
+
+        .empty-cart .btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+        }
+
+        /* Continue Shopping */
+        .continue-shopping {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .back-link {
+            color: var(--gray);
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary);
+            transform: translateX(-5px);
+        }
+
+        .back-link i {
+            margin-right: 5px;
+        }
+
+        .update-cart {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .update-cart:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Recommended Courses */
+        .recommended-section {
+            margin-top: 60px;
+        }
+
+        .recommended-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: var(--dark);
+        }
+
+        .recommended-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .rec-course-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .rec-course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .rec-course-img {
+            height: 120px;
+            overflow: hidden;
+        }
+
+        .rec-course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .rec-course-card:hover .rec-course-img img {
+            transform: scale(1.1);
+        }
+
+        .rec-course-content {
+            padding: 15px;
+        }
+
+        .rec-course-content h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .rec-course-price {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 6px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .recommended-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-summary {
+                position: static;
+            }
+            
+            .recommended-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .cart-header {
+                display: none;
+            }
+            
+            .cart-item {
+                grid-template-columns: 1fr;
+                gap: 15px;
+                position: relative;
+                padding: 20px;
+            }
+            
+            .item-product {
+                margin-bottom: 10px;
+            }
+            
+            .item-price, .item-quantity, .item-total {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 5px 0;
+                border-bottom: 1px dashed #e9ecef;
+            }
+            
+            .item-price::before {
+                content: "Price:";
+                font-weight: 500;
+                color: var(--gray);
+            }
+            
+            .item-quantity::before {
+                content: "Quantity:";
+                font-weight: 500;
+                color: var(--gray);
+            }
+            
+            .item-total::before {
+                content: "Total:";
+                font-weight: 500;
+                color: var(--gray);
+            }
+            
+            .item-actions {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+            }
+            
+            .recommended-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartCount">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+            <p>Review your selected courses before checkout</p>
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div class="container">
+            <!-- Cart Container -->
+            <div id="cartContainer"></div>
+
+            <!-- Continue Shopping -->
+            <div class="continue-shopping">
+                <a href="courses.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                </a>
+                <button class="update-cart" onclick="updateCart()">
+                    <i class="fas fa-sync-alt"></i> Update Cart
+                </button>
+            </div>
+
+            <!-- Recommended Courses -->
+            <div class="recommended-section">
+                <h3 class="recommended-title">You Might Also Like</h3>
+                <div class="recommended-grid" id="recommendedCourses"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Exactly like index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Cart data
+        let cartItems = [
+            {
+                id: 1,
+                title: 'The Complete JavaScript Course 2025',
+                instructor: 'John Smith',
+                image: 'images/js.jpg',
+                price: 49.99,
+                quantity: 1,
+                category: 'Frontend',
+                level: 'All Levels'
+            },
+            {
+                id: 2,
+                title: 'React - The Complete Guide (with Hooks)',
+                instructor: 'Sarah Johnson',
+                image: 'images/react.jpg',
+                price: 69.99,
+                quantity: 1,
+                category: 'Frontend',
+                level: 'Intermediate'
+            },
+            {
+                id: 3,
+                title: 'Node.js API Masterclass with Express',
+                instructor: 'David Wilson',
+                image: 'images/nodejs.jpg',
+                price: 59.99,
+                quantity: 1,
+                category: 'Backend',
+                level: 'Intermediate'
+            }
+        ];
+
+        // Recommended courses
+        const recommendedCourses = [
+            {
+                id: 4,
+                title: 'Python for Data Science',
+                image: 'images/python.jpg',
+                price: 84.99,
+                category: 'Data Science'
+            },
+            {
+                id: 5,
+                title: 'MongoDB - Complete Guide',
+                image: 'images/mongodb.jpg',
+                price: 44.99,
+                category: 'Database'
+            },
+            {
+                id: 6,
+                title: 'Angular 15 - The Complete Guide',
+                image: 'images/angular.jpg',
+                price: 54.99,
+                category: 'Frontend'
+            },
+            {
+                id: 7,
+                title: 'Docker and Kubernetes',
+                image: 'images/docker.jpg',
+                price: 49.99,
+                category: 'DevOps'
+            }
+        ];
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // Check if user is logged in
+            checkAuth();
+            
+            // Load user data
+            loadUserData();
+            
+            // Render cart
+            renderCart();
+            
+            // Render recommended courses
+            renderRecommendedCourses();
+            
+            // Update cart count
+            updateCartCount();
+        });
+
+        // Check authentication
+        function checkAuth() {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (!token || !user) {
+                // If not logged in, redirect to login
+                // For demo, we'll still show cart but with login prompt
+                // Uncomment below to enforce login
+                // window.location.href = 'login.html';
+                return;
+            }
+        }
+
+        // Load user data
+        function loadUserData() {
+            const userStr = localStorage.getItem('user');
+            if (userStr) {
+                try {
+                    const user = JSON.parse(userStr);
+                    if (user.avatar) {
+                        document.getElementById('navUserAvatar').src = user.avatar;
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                }
+            }
+        }
+
+        // Render cart based on items
+        function renderCart() {
+            const cartContainer = document.getElementById('cartContainer');
+            
+            if (cartItems.length === 0) {
+                // Empty cart
+                cartContainer.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <h3>Your cart is empty</h3>
+                        <p>Looks like you haven't added any courses to your cart yet.</p>
+                        <a href="courses.html" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>Browse Courses
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            // Calculate totals
+            const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.1; // 10% tax
+            const total = subtotal + tax;
+
+            // Generate cart items HTML
+            let cartItemsHTML = '';
+            cartItems.forEach(item => {
+                cartItemsHTML += `
+                    <div class="cart-item" data-id="${item.id}">
+                        <div class="item-product">
+                            <div class="item-image">
+                                <img src="${item.image}" alt="${item.title}">
+                            </div>
+                            <div class="item-details">
+                                <h4>${item.title}</h4>
+                                <p>${item.category} • ${item.level}</p>
+                                <div class="item-instructor">
+                                    <i class="fas fa-user"></i> ${item.instructor}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item-price">$${item.price.toFixed(2)}</div>
+                        <div class="item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="quantity-value">${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <div class="item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+                        <div class="item-actions">
+                            <button class="remove-btn" onclick="removeItem(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Full cart HTML
+            cartContainer.innerHTML = `
+                <div class="cart-container">
+                    <div class="cart-items">
+                        <div class="cart-header">
+                            <span>Product</span>
+                            <span>Price</span>
+                            <span>Quantity</span>
+                            <span>Total</span>
+                            <span></span>
+                        </div>
+                        ${cartItemsHTML}
+                    </div>
+
+                    <div class="cart-summary">
+                        <h3 class="summary-title">Order Summary</h3>
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span>$${subtotal.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%)</span>
+                            <span>$${tax.toFixed(2)}</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total</span>
+                            <span>$${total.toFixed(2)}</span>
+                        </div>
+
+                        <div class="promo-code">
+                            <input type="text" placeholder="Promo code" id="promoInput">
+                            <button onclick="applyPromo()">Apply</button>
+                        </div>
+
+                        <button class="checkout-btn" onclick="checkout()">
+                            Proceed to Checkout
+                        </button>
+
+                        <div class="secure-checkout">
+                            <i class="fas fa-lock"></i>
+                            <span>Secure Checkout</span>
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+
+                        <div class="payment-methods">
+                            <img src="images/visa.png" alt="Visa">
+                            <img src="images/mastercard.png" alt="Mastercard">
+                            <img src="images/paypal.png" alt="PayPal">
+                            <img src="images/amex.png" alt="American Express">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Render recommended courses
+        function renderRecommendedCourses() {
+            const container = document.getElementById('recommendedCourses');
+            
+            let html = '';
+            recommendedCourses.forEach(course => {
+                html += `
+                    <div class="rec-course-card">
+                        <div class="rec-course-img">
+                            <img src="${course.image}" alt="${course.title}">
+                        </div>
+                        <div class="rec-course-content">
+                            <h4>${course.title}</h4>
+                            <div class="rec-course-price">$${course.price}</div>
+                            <button class="add-to-cart-btn" onclick="addToCart(${course.id})">
+                                <i class="fas fa-cart-plus"></i> Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Update quantity
+        function updateQuantity(id, change) {
+            const item = cartItems.find(i => i.id === id);
+            if (item) {
+                item.quantity = Math.max(1, item.quantity + change);
+                renderCart();
+                updateCartCount();
+            }
+        }
+
+        // Remove item from cart
+        function removeItem(id) {
+            cartItems = cartItems.filter(i => i.id !== id);
+            renderCart();
+            updateCartCount();
+            
+            // Show message
+            alert('Item removed from cart');
+        }
+
+        // Add to cart from recommendations
+        function addToCart(id) {
+            const course = recommendedCourses.find(c => c.id === id);
+            if (course) {
+                // Check if already in cart
+                const existing = cartItems.find(i => i.id === id);
+                if (existing) {
+                    existing.quantity++;
+                } else {
+                    cartItems.push({
+                        id: course.id,
+                        title: course.title,
+                        instructor: 'Stack Academy',
+                        image: course.image,
+                        price: course.price,
+                        quantity: 1,
+                        category: course.category,
+                        level: 'All Levels'
+                    });
+                }
+                renderCart();
+                updateCartCount();
+                alert(`${course.title} added to cart!`);
+            }
+        }
+
+        // Update cart count
+        function updateCartCount() {
+            const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        // Apply promo code
+        function applyPromo() {
+            const promo = document.getElementById('promoInput').value;
+            if (promo.toUpperCase() === 'STACK10') {
+                alert('Promo code applied! 10% discount');
+            } else {
+                alert('Invalid promo code');
+            }
+        }
+
+        // Update cart (refresh)
+        function updateCart() {
+            renderCart();
+            alert('Cart updated!');
+        }
+
+        // Checkout
+        function checkout() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Check if user is logged in
+            const token = localStorage.getItem('token');
+            if (!token) {
+                if (confirm('Please login to continue with checkout')) {
+                    window.location.href = 'login.html';
+                }
+                return;
+            }
+            
+            window.location.href = 'checkout.html';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <!-- cart.html -->
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadCart();
+});
+
+async function loadCart() {
+    try {
+        const response = await api.get('/cart');
+        displayCart(response.data);
+    } catch (error) {
+        console.error('Failed to load cart:', error);
+    }
+}
+
+function displayCart(cart) {
+    if (!cart.items || cart.items.length === 0) {
+        showEmptyCart();
+        return;
+    }
+    
+    const container = document.getElementById('cartItems');
+    container.innerHTML = '';
+    
+    cart.items.forEach(item => {
+        container.innerHTML += `
+            <div class="cart-item" data-id="${item._id}">
+                <div class="item-product">
+                    <div class="item-image">
+                        <img src="images/${item.course.thumbnail}" alt="${item.course.title}">
+                    </div>
+                    <div class="item-details">
+                        <h4>${item.course.title}</h4>
+                        <p>${item.course.category} • ${item.course.level}</p>
+                        <div class="item-instructor">
+                            <i class="fas fa-user"></i> ${item.course.instructor.firstName} ${item.course.instructor.lastName}
+                        </div>
+                    </div>
+                </div>
+                <div class="item-price">$${item.price}</div>
+                <div class="item-quantity">
+                    <button class="quantity-btn" onclick="updateQuantity('${item._id}', -1)">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <span class="quantity-value">${item.quantity}</span>
+                    <button class="quantity-btn" onclick="updateQuantity('${item._id}', 1)">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+                <div class="item-total">$${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="item-actions">
+                    <button class="remove-btn" onclick="removeItem('${item._id}')">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+    
+    // Update summary
+    document.getElementById('subtotal').textContent = `$${cart.totalPrice.toFixed(2)}`;
+    const tax = cart.totalPrice * 0.1;
+    document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+    document.getElementById('total').textContent = `$${(cart.totalPrice + tax).toFixed(2)}`;
+}
+
+async function updateQuantity(itemId, change) {
+    try {
+        const cart = await api.get('/cart');
+        const item = cart.data.items.find(i => i._id === itemId);
+        const newQuantity = Math.max(1, item.quantity + change);
+        
+        await api.put(`/cart/${itemId}`, { quantity: newQuantity });
+        await loadCart(); // Reload cart
+    } catch (error) {
+        console.error('Failed to update quantity:', error);
+    }
+}
+
+async function removeItem(itemId) {
+    if (confirm('Remove this item from cart?')) {
+        try {
+            await api.delete(`/cart/${itemId}`);
+            await loadCart(); // Reload cart
+        } catch (error) {
+            console.error('Failed to remove item:', error);
+        }
+    }
+}
+
+async function checkout() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html?redirect=cart.html';
+        return;
+    }
+    
+    window.location.href = 'checkout.html';
+}
+
+function showEmptyCart() {
+    document.getElementById('cartContainer').innerHTML = `
+        <div class="empty-cart">
+            <div class="empty-cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <h3>Your cart is empty</h3>
+            <p>Looks like you haven't added any courses yet.</p>
+            <a href="courses.html" class="btn btn-primary">
+                <i class="fas fa-search me-2"></i>Browse Courses
+            </a>
+        </div>
+    `;
+}
+</script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

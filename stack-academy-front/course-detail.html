@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Complete Guide - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Master JavaScript from scratch. Learn ES6+, DOM manipulation, async programming, and more in this comprehensive course.">
+    <meta name="keywords" content="JavaScript Course, Learn JavaScript, Web Development, Programming">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Course Hero */
+        .course-hero {
+            background: linear-gradient(135deg, var(--dark), #1a2530);
+            color: white;
+            padding: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .course-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+        }
+
+        .course-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .course-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .course-hero p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .course-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .instructor-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .instructor-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            object-fit: cover;
+        }
+
+        /* Main Content */
+        .course-main {
+            padding: 60px 0;
+        }
+
+        .course-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+        }
+
+        /* Course Content */
+        .course-content {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .content-section {
+            margin-bottom: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .content-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .content-section h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .content-section h2 i {
+            color: var(--primary);
+            margin-right: 10px;
+        }
+
+        /* What You'll Learn */
+        .learn-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .learn-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .learn-item i {
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        /* Curriculum */
+        .curriculum-item {
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .curriculum-header {
+            background: var(--light);
+            padding: 15px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .curriculum-header h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .curriculum-header span {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        .curriculum-content {
+            padding: 20px;
+            display: none;
+            background: white;
+        }
+
+        .curriculum-item.active .curriculum-content {
+            display: block;
+        }
+
+        .lesson-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .lesson-item:last-child {
+            border-bottom: none;
+        }
+
+        .lesson-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .lesson-info i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        .lesson-duration {
+            color: var(--gray);
+            font-size: 13px;
+        }
+
+        /* Instructor */
+        .instructor-detail {
+            display: flex;
+            gap: 25px;
+        }
+
+        .instructor-detail-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-detail-info h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .instructor-detail-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+
+        .instructor-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .instructor-stats span {
+            font-size: 13px;
+            color: var(--gray);
+        }
+
+        .instructor-stats i {
+            color: var(--primary);
+            margin-right: 5px;
+        }
+
+        /* Reviews */
+        .review-card {
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .reviewer {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .reviewer-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .reviewer-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .reviewer-info .date {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .review-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+
+        .review-text {
+            color: var(--gray);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        /* Sidebar */
+        .course-sidebar {
+            position: sticky;
+            top: 100px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-lg);
+            margin-bottom: 25px;
+        }
+
+        .course-preview {
+            width: 100%;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .course-price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .course-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-right: 10px;
+        }
+
+        .enroll-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+
+        .enroll-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .wishlist-btn {
+            width: 100%;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 13px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .wishlist-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .includes-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .includes-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .includes-list li i {
+            color: var(--primary);
+            width: 20px;
+        }
+
+        /* Message Container */
+        #messageContainer {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+            border: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .alert-success {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .alert-success i {
+            color: white;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .course-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .course-sidebar {
+                position: static;
+            }
+            
+            .learn-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .instructor-detail {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .instructor-stats {
+                justify-content: center;
+            }
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge" id="cartCount">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Course Hero -->
+    <section class="course-hero">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <span class="course-badge">Bestseller</span>
+                    <h1>The Complete JavaScript Course 2025: From Zero to Expert!</h1>
+                    <p>The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory. Many courses in one!</p>
+                    
+                    <div class="course-meta">
+                        <div class="meta-item">
+                            <i class="fas fa-star text-warning"></i>
+                            <span>4.8 (15,234 ratings)</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-users"></i>
+                            <span>125,430 students</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span>45 hours</span>
+                        </div>
+                        <div class="meta-item">
+                            <i class="fas fa-signal"></i>
+                            <span>All Levels</span>
+                        </div>
+                    </div>
+
+                    <div class="instructor-info">
+                        <img src="images/grad3.jpg" alt="Instructor" class="instructor-img">
+                        <div>
+                            <p class="mb-0">Created by</p>
+                            <h5 class="mb-0">ALI ELRAZI</h5>
+                            <small>Senior Developer & Educator</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="course-main">
+        <div class="container">
+            <div class="course-container">
+                <!-- Left Column -->
+                <div class="course-content">
+                    <!-- Message Container -->
+                    <div id="messageContainer"></div>
+
+                    <!-- What You'll Learn -->
+                    <div class="content-section">
+                        <h2><i class="fas fa-graduation-cap"></i> What You'll Learn</h2>
+                        <div class="learn-grid">
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Modern JavaScript (ES6+) from scratch</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>DOM manipulation and events</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Asynchronous programming</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>API integration and fetch</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Object-oriented programming</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Functional programming</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Error handling and debugging</span>
+                            </div>
+                            <div class="learn-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Modern tools and workflow</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Course Curriculum -->
+                    <div class="content-section">
+                        <h2><i class="fas fa-list"></i> Course Curriculum</h2>
+                        
+                        <div class="curriculum-item active">
+                            <div class="curriculum-header" onclick="toggleCurriculum(this)">
+                                <h4>Section 1: JavaScript Fundamentals</h4>
+                                <span>12 lessons • 3.5 hours</span>
+                            </div>
+                            <div class="curriculum-content">
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Introduction to JavaScript
+                                    </div>
+                                    <div class="lesson-duration">15:30</div>
+                                </div>
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Variables and Data Types
+                                    </div>
+                                    <div class="lesson-duration">25:45</div>
+                                </div>
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Operators and Expressions
+                                    </div>
+                                    <div class="lesson-duration">20:15</div>
+                                </div>
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Control Flow (if/else, switch)
+                                    </div>
+                                    <div class="lesson-duration">30:20</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="curriculum-item">
+                            <div class="curriculum-header" onclick="toggleCurriculum(this)">
+                                <h4>Section 2: Functions and Objects</h4>
+                                <span>10 lessons • 4 hours</span>
+                            </div>
+                            <div class="curriculum-content">
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Function Declarations vs Expressions
+                                    </div>
+                                    <div class="lesson-duration">22:10</div>
+                                </div>
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Arrow Functions
+                                    </div>
+                                    <div class="lesson-duration">18:45</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="curriculum-item">
+                            <div class="curriculum-header" onclick="toggleCurriculum(this)">
+                                <h4>Section 3: DOM Manipulation</h4>
+                                <span>8 lessons • 3 hours</span>
+                            </div>
+                            <div class="curriculum-content">
+                                <div class="lesson-item">
+                                    <div class="lesson-info">
+                                        <i class="fas fa-play-circle"></i>
+                                        Selecting Elements
+                                    </div>
+                                    <div class="lesson-duration">20:30</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instructor -->
+                    <div class="content-section">
+                        <h2><i class="fas fa-chalkboard-teacher"></i> Your Instructor</h2>
+                        <div class="instructor-detail">
+                            <img src="images/grad3.jpg" alt="John Smith" class="instructor-detail-img">
+                            <div class="instructor-detail-info">
+                                <h3>ALI ELRAZI</h3>
+                                <p>Senior Full Stack Developer with over 10 years of experience. Has taught over 200,000 students worldwide.</p>
+                                <div class="instructor-stats">
+                                    <span><i class="fas fa-star"></i> 4.8 Instructor Rating</span>
+                                    <span><i class="fas fa-users"></i> 200K+ Students</span>
+                                    <span><i class="fas fa-play-circle"></i> 15 Courses</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews -->
+                    <div class="content-section">
+                        <h2><i class="fas fa-star"></i> Student Reviews</h2>
+                        
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <img src="images/grad.jpg" alt="Reviewer" class="reviewer-img">
+                                <div class="reviewer-info">
+                                    <h4>Sama Ahmad</h4>
+                                    <div class="date">2 weeks ago</div>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="review-text">This is by far the best JavaScript course I've ever taken. The instructor explains everything clearly and the projects are very practical.</p>
+                        </div>
+
+                        <div class="review-card">
+                            <div class="reviewer">
+                                <img src="images/grad2.jpg" alt="Reviewer" class="reviewer-img">
+                                <div class="reviewer-info">
+                                    <h4>Hoda RABEA</h4>
+                                    <div class="date">1 month ago</div>
+                                </div>
+                            </div>
+                            <div class="review-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="review-text">Excellent course! Very comprehensive and well-structured. Highly recommended for beginners.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="course-sidebar">
+                    <div class="sidebar-card">
+                        <img src="images/js-course-preview.jpg" alt="Course Preview" class="course-preview">
+                        <div class="course-price">
+                            <small>$94.99</small>
+                            $49.99
+                        </div>
+                        <button class="enroll-btn" onclick="enrollCourse()">
+                            <i class="fas fa-shopping-cart me-2"></i>Enroll Now
+                        </button>
+                        <button class="wishlist-btn" onclick="addToWishlist()">
+                            <i class="far fa-heart me-2"></i>Add to Wishlist
+                        </button>
+
+                        <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 15px;">This course includes:</h4>
+                        <ul class="includes-list">
+                            <li><i class="fas fa-video"></i> 45 hours on-demand video</li>
+                            <li><i class="fas fa-file-alt"></i> 75 articles</li>
+                            <li><i class="fas fa-download"></i> 120 downloadable resources</li>
+                            <li><i class="fas fa-certificate"></i> Certificate of completion</li>
+                            <li><i class="fas fa-mobile-alt"></i> Access on mobile and TV</li>
+                            <li><i class="fas fa-infinity"></i> Full lifetime access</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Exactly like index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (token && user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.avatar) {
+                        document.getElementById('navUserAvatar').src = userData.avatar;
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                }
+            }
+        });
+
+        // Toggle curriculum sections
+        function toggleCurriculum(element) {
+            const curriculumItem = element.closest('.curriculum-item');
+            curriculumItem.classList.toggle('active');
+        }
+
+        // Enroll in course
+        function enrollCourse() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Course added to cart successfully! Redirecting to cart...
+                </div>
+            `;
+            
+            setTimeout(() => {
+                window.location.href = 'cart.html';
+            }, 2000);
+        }
+
+        // Add to wishlist
+        function addToWishlist() {
+            const messageContainer = document.getElementById('messageContainer');
+            messageContainer.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Course added to wishlist!
+                </div>
+            `;
+            
+            setTimeout(() => {
+                messageContainer.innerHTML = '';
+            }, 3000);
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+
+document.addEventListener('DOMContentLoaded', async function() {
+    // Get course ID from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+    
+    if (!courseId) {
+        window.location.href = 'courses.html';
+        return;
+    }
+    
+    try {
+        // Fetch course details from backend
+        const response = await api.get(`/courses/${courseId}`);
+        displayCourseDetails(response.data);
+        
+    } catch (error) {
+        console.error('Failed to load course:', error);
+        showError('Course not found');
+    }
+});
+
+function displayCourseDetails(course) {
+    // Update page title
+    document.title = `${course.title} - Stack Academy`;
+    
+    // Update hero section
+    document.getElementById('courseBadge').textContent = course.isBestseller ? 'Bestseller' : 'Featured';
+    document.getElementById('courseTitle').textContent = course.title;
+    document.getElementById('courseDescription').textContent = course.description;
+    
+    // Update meta info
+    document.getElementById('courseRating').innerHTML = generateStars(course.rating);
+    document.getElementById('ratingValue').textContent = course.rating;
+    document.getElementById('totalStudents').textContent = formatNumber(course.totalStudents);
+    document.getElementById('courseDuration').textContent = `${course.duration.hours} hours`;
+    document.getElementById('courseLevel').textContent = course.level;
+    
+    // Update instructor
+    document.getElementById('instructorImg').src = `images/${course.instructor.avatar}`;
+    document.getElementById('instructorName').textContent = `${course.instructor.firstName} ${course.instructor.lastName}`;
+    document.getElementById('instructorTitle').textContent = course.instructor.title || 'Senior Instructor';
+    
+    // Update what you'll learn
+    const learnList = document.getElementById('whatYouLearn');
+    learnList.innerHTML = '';
+    course.whatYouWillLearn.forEach(item => {
+        learnList.innerHTML += `
+            <div class="learn-item">
+                <i class="fas fa-check-circle"></i>
+                <span>${item}</span>
+            </div>
+        `;
+    });
+    
+    // Update curriculum
+    const curriculum = document.getElementById('curriculum');
+    curriculum.innerHTML = '';
+    course.curriculum.forEach((section, index) => {
+        curriculum.innerHTML += `
+            <div class="curriculum-item ${index === 0 ? 'active' : ''}">
+                <div class="curriculum-header" onclick="toggleCurriculum(this)">
+                    <h4>${section.section}</h4>
+                    <span>${section.lessons.length} lessons</span>
+                </div>
+                <div class="curriculum-content">
+                    ${section.lessons.map(lesson => `
+                        <div class="lesson-item">
+                            <div class="lesson-info">
+                                <i class="fas fa-play-circle"></i>
+                                ${lesson.title}
+                            </div>
+                            <div class="lesson-duration">${lesson.duration}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    });
+    
+    // Update price
+    document.getElementById('coursePrice').innerHTML = `
+        ${course.discountPrice ? `<small>$${course.price}</small> $${course.discountPrice}` : `$${course.price}`}
+    `;
+    
+    // Set up enroll button
+    document.getElementById('enrollBtn').onclick = () => enrollInCourse(course._id);
+}
+
+async function enrollInCourse(courseId) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        if (confirm('Please login to enroll in this course')) {
+            window.location.href = `login.html?redirect=course-detail.html?id=${courseId}`;
+        }
+        return;
+    }
+    
+    try {
+        // Add to cart
+        await api.post('/cart', { courseId });
+        showMessage('Course added to cart!', 'success');
+        setTimeout(() => {
+            window.location.href = 'cart.html';
+        }, 1500);
+    } catch (error) {
+        showMessage(error.message, 'error');
+    }
+}
+
+function formatNumber(num) {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num;
+}
+</script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

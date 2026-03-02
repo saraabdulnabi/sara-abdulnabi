@@ -1,0 +1,1380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Manage your Stack Academy profile, view your progress, and update personal information.">
+    <meta name="keywords" content="Profile, User Profile, Student Profile, Stack Academy">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 40px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            position: relative;
+        }
+
+        /* Profile Container */
+        .profile-container {
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            padding-bottom: 60px;
+        }
+
+        /* Profile Cover Card */
+        .profile-cover-card {
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .profile-cover {
+            height: 150px;
+            background: linear-gradient(135deg, var(--primary-light), var(--secondary-light));
+            position: relative;
+        }
+
+        .profile-edit-cover {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            border: none;
+            border-radius: 30px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--dark);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .profile-edit-cover:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .profile-edit-cover i {
+            margin-right: 5px;
+        }
+
+        .profile-info {
+            padding: 0 30px 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            position: relative;
+        }
+
+        .profile-avatar-container {
+            margin-top: -60px;
+            position: relative;
+        }
+
+        .profile-avatar-large {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 5px solid white;
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+            background: white;
+        }
+
+        .profile-edit-avatar {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: 2px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-edit-avatar:hover {
+            background: var(--accent);
+            transform: scale(1.1);
+        }
+
+        .profile-details {
+            flex: 1;
+            padding-top: 15px;
+        }
+
+        .profile-details h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .profile-username {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .profile-username i {
+            font-size: 14px;
+        }
+
+        .profile-bio {
+            color: var(--gray);
+            margin-bottom: 15px;
+            max-width: 500px;
+        }
+
+        .profile-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .profile-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .profile-meta-item i {
+            color: var(--primary);
+            width: 18px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        .stat-box {
+            text-align: center;
+            min-width: 80px;
+        }
+
+        .stat-box h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .stat-box p {
+            color: var(--gray);
+            font-size: 12px;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Profile Navigation */
+        .profile-nav {
+            background: white;
+            border-radius: 16px;
+            padding: 10px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .profile-nav-item {
+            padding: 10px 20px;
+            color: var(--gray);
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-nav-item i {
+            font-size: 14px;
+        }
+
+        .profile-nav-item:hover {
+            background: rgba(228, 124, 156, 0.1);
+            color: var(--primary);
+        }
+
+        .profile-nav-item.active {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Profile Content Cards */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-card.full-width {
+            grid-column: span 2;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .card-header h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+            color: var(--dark);
+        }
+
+        .card-header h3 i {
+            color: var(--primary);
+            margin-right: 10px;
+            font-size: 1.1rem;
+        }
+
+        .edit-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .edit-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Info List */
+        .info-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .info-item {
+            display: flex;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            width: 120px;
+            font-weight: 500;
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .info-value {
+            flex: 1;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        /* Course Progress Items */
+        .course-progress-item {
+            display: flex;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .course-progress-item:last-child {
+            border-bottom: none;
+        }
+
+        .course-progress-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .course-progress-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .course-progress-info {
+            flex: 1;
+        }
+
+        .course-progress-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark);
+        }
+
+        .course-progress-info p {
+            font-size: 12px;
+            color: var(--gray);
+            margin-bottom: 8px;
+        }
+
+        .progress {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 10px;
+        }
+
+        .progress-percent {
+            font-size: 11px;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Achievements Grid */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .achievement-badge {
+            text-align: center;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-badge:hover {
+            transform: translateY(-3px);
+            background: rgba(228, 124, 156, 0.1);
+        }
+
+        .achievement-icon {
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .achievement-badge h5 {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--dark);
+        }
+
+        .achievement-badge p {
+            font-size: 10px;
+            color: var(--gray);
+            margin: 0;
+        }
+
+        /* Activity List */
+        .activity-list-compact {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .activity-item-compact {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f2f5;
+        }
+
+        .activity-item-compact:last-child {
+            border-bottom: none;
+        }
+
+        .activity-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+        }
+
+        .activity-dot.completed {
+            background: #28a745;
+        }
+
+        .activity-dot.started {
+            background: var(--primary);
+        }
+
+        .activity-dot.achievement {
+            background: #ffc107;
+        }
+
+        .activity-text-compact {
+            flex: 1;
+            font-size: 13px;
+            color: var(--dark);
+        }
+
+        .activity-time-compact {
+            font-size: 11px;
+            color: var(--gray);
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-card.full-width {
+                grid-column: span 1;
+            }
+            
+            .profile-stats {
+                margin-left: 0;
+                width: 100%;
+                justify-content: flex-start;
+            }
+            
+            .profile-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-nav {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding: 10px;
+            }
+            
+            .profile-nav-item {
+                white-space: nowrap;
+            }
+            
+            .achievements-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .info-item {
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .info-label {
+                width: 100%;
+            }
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item active" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>My Profile</h1>
+            <p>Manage your personal information and track your learning journey</p>
+        </div>
+    </section>
+
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <div class="container">
+            <!-- Profile Cover Card -->
+            <div class="profile-cover-card">
+                <div class="profile-cover">
+                    <button class="profile-edit-cover">
+                        <i class="fas fa-camera"></i> Change Cover
+                    </button>
+                </div>
+                
+                <div class="profile-info">
+                    <div class="profile-avatar-container">
+                        <img src="images/default-avatar.png" alt="Profile Avatar" class="profile-avatar-large" id="profileAvatar">
+                        <div class="profile-edit-avatar">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-details">
+                        <h2 id="profileName">Sarah Abdulnabi</h2>
+                        <div class="profile-username">
+                            <i class="fas fa-at"></i> @sarah_abdulnabi
+                        </div>
+                        <p class="profile-bio" id="profileBio">Full Stack Developer Student passionate about building web applications and learning new technologies.</p>
+                        
+                        <div class="profile-meta">
+                            <span class="profile-meta-item">
+                                <i class="fas fa-map-marker-alt"></i> Amman, Jordan
+                            </span>
+                            <span class="profile-meta-item">
+                                <i class="fas fa-calendar"></i> Joined Jan 2025
+                            </span>
+                            <span class="profile-meta-item">
+                                <i class="fas fa-globe"></i> stackacademy.com/sarah
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-stats">
+                        <div class="stat-box">
+                            <h3>6</h3>
+                            <p>Courses</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>48</h3>
+                            <p>Hours</p>
+                        </div>
+                        <div class="stat-box">
+                            <h3>12</h3>
+                            <p>Projects</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Navigation -->
+            <div class="profile-nav">
+                <a href="#overview" class="profile-nav-item active" onclick="showTab('overview')">
+                    <i class="fas fa-user"></i> Overview
+                </a>
+                <a href="#courses" class="profile-nav-item" onclick="showTab('courses')">
+                    <i class="fas fa-book-open"></i> My Courses
+                </a>
+                <a href="#achievements" class="profile-nav-item" onclick="showTab('achievements')">
+                    <i class="fas fa-trophy"></i> Achievements
+                </a>
+                <a href="#activity" class="profile-nav-item" onclick="showTab('activity')">
+                    <i class="fas fa-history"></i> Activity
+                </a>
+                <a href="settings.html" class="profile-nav-item">
+                    <i class="fas fa-cog"></i> Settings
+                </a>
+            </div>
+
+            <!-- Profile Content - Overview Tab (Default) -->
+            <div id="overview-tab" class="profile-content">
+                <!-- Personal Information Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-id-card"></i> Personal Information</h3>
+                        <button class="edit-btn" onclick="editPersonalInfo()">
+                            <i class="fas fa-edit"></i> Edit
+                        </button>
+                    </div>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">Full Name</span>
+                            <span class="info-value" id="displayFullName">Sarah Abdulnabi</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Email Address</span>
+                            <span class="info-value" id="displayEmail">sarah.abdulnabi@example.com</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Phone Number</span>
+                            <span class="info-value" id="displayPhone">+962 79 123 4567</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Date of Birth</span>
+                            <span class="info-value" id="displayDob">15 May 1995</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Country</span>
+                            <span class="info-value" id="displayCountry">Jordan</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Learning Stats Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Learning Stats</h3>
+                        <a href="dashboard.html" class="edit-btn">
+                            <i class="fas fa-arrow-right"></i> Details
+                        </a>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="font-weight: 500;">Overall Progress</span>
+                            <span style="color: var(--primary); font-weight: 600;">68%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    
+                    <ul class="info-list">
+                        <li class="info-item">
+                            <span class="info-label">Courses Enrolled</span>
+                            <span class="info-value">6</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Completed Courses</span>
+                            <span class="info-value">3</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Learning Hours</span>
+                            <span class="info-value">48 hours</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Projects Completed</span>
+                            <span class="info-value">12</span>
+                        </li>
+                        <li class="info-item">
+                            <span class="info-label">Certificates Earned</span>
+                            <span class="info-value">3</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Current Courses Card (Full Width) -->
+                <div class="profile-card full-width">
+                    <div class="card-header">
+                        <h3><i class="fas fa-play-circle"></i> Current Courses</h3>
+                        <a href="courses.html" class="edit-btn">
+                            <i class="fas fa-plus"></i> Browse More
+                        </a>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <div class="course-progress-item" style="border-bottom: none; padding: 0;">
+                                <div class="course-progress-img">
+                                    <img src="images/js.jpg" alt="JavaScript">
+                                </div>
+                                <div class="course-progress-info">
+                                    <h4>JavaScript Complete Guide</h4>
+                                    <p>8 weeks • Intermediate</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 75%"></div>
+                                    </div>
+                                    <span class="progress-percent">75%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="course-progress-item" style="border-bottom: none; padding: 0;">
+                                <div class="course-progress-img">
+                                    <img src="images/react.jpg" alt="React">
+                                </div>
+                                <div class="course-progress-info">
+                                    <h4>React Masterclass</h4>
+                                    <p>10 weeks • Advanced</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 45%"></div>
+                                    </div>
+                                    <span class="progress-percent">45%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="course-progress-item" style="border-bottom: none; padding: 0;">
+                                <div class="course-progress-img">
+                                    <img src="images/nodejs.jpg" alt="Node.js">
+                                </div>
+                                <div class="course-progress-info">
+                                    <h4>Node.js Backend</h4>
+                                    <p>8 weeks • Intermediate</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" style="width: 30%"></div>
+                                    </div>
+                                    <span class="progress-percent">30%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements Preview Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-trophy"></i> Recent Achievements</h3>
+                        <a href="#" class="edit-btn" onclick="showTab('achievements')">
+                            <i class="fas fa-arrow-right"></i> View All
+                        </a>
+                    </div>
+                    
+                    <div class="achievements-grid">
+                        <div class="achievement-badge">
+                            <div class="achievement-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h5>Quick Starter</h5>
+                            <p>Completed first course</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <div class="achievement-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <h5>7 Day Streak</h5>
+                            <p>Learned 7 days in a row</p>
+                        </div>
+                        <div class="achievement-badge">
+                            <div class="achievement-icon">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <h5>Top Performer</h5>
+                            <p>Top 10% in course</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity Card -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                        <a href="#" class="edit-btn" onclick="showTab('activity')">
+                            <i class="fas fa-arrow-right"></i> View All
+                        </a>
+                    </div>
+                    
+                    <ul class="activity-list-compact">
+                        <li class="activity-item-compact">
+                            <span class="activity-dot completed"></span>
+                            <span class="activity-text-compact">Completed "JavaScript Basics"</span>
+                            <span class="activity-time-compact">2 hours ago</span>
+                        </li>
+                        <li class="activity-item-compact">
+                            <span class="activity-dot started"></span>
+                            <span class="activity-text-compact">Started "React Hooks"</span>
+                            <span class="activity-time-compact">Yesterday</span>
+                        </li>
+                        <li class="activity-item-compact">
+                            <span class="activity-dot achievement"></span>
+                            <span class="activity-text-compact">Earned "Quick Learner" badge</span>
+                            <span class="activity-time-compact">2 days ago</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer - Exactly like index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (!token || !user) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            try {
+                const userData = JSON.parse(user);
+                updateProfileUI(userData);
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        });
+
+        // Update profile UI with user data
+        function updateProfileUI(user) {
+            if (user.name) {
+                document.getElementById('profileName').textContent = user.name;
+                document.getElementById('displayFullName').textContent = user.name;
+            }
+            
+            if (user.email) {
+                document.getElementById('displayEmail').textContent = user.email;
+            }
+            
+            if (user.avatar) {
+                document.getElementById('profileAvatar').src = user.avatar;
+                document.getElementById('navUserAvatar').src = user.avatar;
+            }
+            
+            if (user.bio) {
+                document.getElementById('profileBio').textContent = user.bio;
+            }
+            
+            if (user.phone) {
+                document.getElementById('displayPhone').textContent = user.phone;
+            }
+            
+            if (user.country) {
+                document.getElementById('displayCountry').textContent = user.country;
+            }
+        }
+
+        // Tab switching
+        function showTab(tabName) {
+            // Hide all tabs
+            document.getElementById('overview-tab').style.display = 'none';
+            
+            // Show selected tab
+            if (tabName === 'overview') {
+                document.getElementById('overview-tab').style.display = 'grid';
+            }
+            
+            // Update active class on nav items
+            document.querySelectorAll('.profile-nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            event.target.closest('.profile-nav-item').classList.add('active');
+        }
+
+        // Edit personal info
+        function editPersonalInfo() {
+            window.location.href = 'settings.html';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

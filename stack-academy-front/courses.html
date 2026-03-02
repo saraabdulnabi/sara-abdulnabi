@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Courses - Stack Academy</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Browse our comprehensive collection of web development courses. Learn HTML, CSS, JavaScript, React, Node.js and more.">
+    <meta name="keywords" content="Web Development Courses, Learn Coding, Programming Courses, Full Stack Development">
+    <meta name="author" content="Stack Academy">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        :root {
+            --primary: #E47C9C;
+            --primary-dark: #D86897;
+            --primary-light: #F6A0AC;
+            --secondary: #71C7FE;
+            --secondary-dark: #2C9BFF;
+            --secondary-light: #A1C3E7;
+            --accent: #908DCE;
+            --accent-dark: #6B68B0;
+            --accent-light: #B8B5FF;
+            --dark: #2C3E50;
+            --light: #EEF1F8;
+            --gray: #675F61;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-sm: 0 4px 6px rgba(228, 124, 156, 0.1);
+            --shadow-md: 0 8px 15px rgba(228, 124, 156, 0.15);
+            --shadow-lg: 0 15px 30px rgba(228, 124, 156, 0.2);
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation - Exactly like index.html */
+        .navbar {
+            background-color: white;
+            padding: 1rem 0;
+            box-shadow: var(--shadow-md);
+            border-bottom: 2px solid var(--primary-light);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+        }
+
+        .brand-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: color 0.3s ease;
+        }
+
+        .brand-text:hover {
+            color: var(--secondary);
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--gray);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            color: var(--primary);
+            background-color: rgba(228, 124, 156, 0.1);
+        }
+
+        .btn-icon {
+            color: var(--primary);
+            background: rgba(228, 124, 156, 0.1);
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--primary);
+            color: white;
+            font-size: 10px;
+            font-weight: 600;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            padding: 60px 0;
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Search and Filter Section */
+        .filter-section {
+            background: white;
+            padding: 25px 0;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 40px;
+        }
+
+        .filter-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 180px;
+            position: relative;
+        }
+
+        .filter-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray);
+            font-size: 14px;
+        }
+
+        .filter-group select,
+        .filter-group input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            appearance: none;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-group select:focus,
+        .filter-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(228, 124, 156, 0.1);
+        }
+
+        .filter-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23675F61' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .search-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .search-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Active Filters */
+        .active-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        .filter-tag {
+            background: rgba(228, 124, 156, 0.1);
+            color: var(--primary);
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-tag i {
+            cursor: pointer;
+            font-size: 12px;
+        }
+
+        .filter-tag i:hover {
+            color: #dc3545;
+        }
+
+        .clear-all {
+            color: var(--gray);
+            font-size: 13px;
+            text-decoration: none;
+            padding: 6px 15px;
+        }
+
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .category-pill {
+            padding: 10px 24px;
+            border-radius: 40px;
+            background: white;
+            color: var(--gray);
+            font-weight: 500;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 2px solid transparent;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-pill i {
+            margin-right: 8px;
+        }
+
+        /* Results Info */
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            color: var(--gray);
+            font-size: 15px;
+        }
+
+        .results-count strong {
+            color: var(--dark);
+            font-size: 18px;
+        }
+
+        .sort-select {
+            padding: 8px 25px 8px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 30px;
+            font-size: 14px;
+            font-family: "Poppins", sans-serif;
+            background: white;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23675F61' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+        }
+
+        .sort-select:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        /* Course Cards Grid */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .course-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .course-badge.bestseller {
+            background: #ffc107;
+            color: var(--dark);
+        }
+
+        .course-badge.hot {
+            background: #dc3545;
+        }
+
+        .course-badge.new {
+            background: #28a745;
+        }
+
+        .course-img {
+            height: 160px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .course-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .course-card:hover .course-img img {
+            transform: scale(1.1);
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-category {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+
+        .course-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark);
+            line-height: 1.4;
+        }
+
+        .course-instructor {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .instructor-img {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .instructor-name {
+            font-size: 12px;
+            color: var(--gray);
+        }
+
+        .course-rating {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 13px;
+        }
+
+        .rating-value {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 13px;
+        }
+
+        .reviews-count {
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--gray);
+            font-size: 12px;
+        }
+
+        .meta-item i {
+            color: var(--primary);
+            font-size: 13px;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .course-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .course-price small {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray);
+            text-decoration: line-through;
+            margin-right: 5px;
+        }
+
+        .enroll-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .enroll-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 40px 0 20px;
+        }
+
+        .page-item {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: white;
+            color: var(--gray);
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .page-item:hover,
+        .page-item.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .page-item.next-prev {
+            width: auto;
+            padding: 0 15px;
+            border-radius: 30px;
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px 0;
+            color: white;
+            text-align: center;
+        }
+
+        .newsletter-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .newsletter-section p {
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+        }
+
+        .newsletter-form input:focus {
+            outline: 2px solid white;
+        }
+
+        .newsletter-form button {
+            background: var(--dark);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #1a2530;
+            transform: translateY(-2px);
+        }
+
+        /* Footer - Exactly like index.html */
+        .footer {
+            background: linear-gradient(to bottom, var(--dark), #1a2530);
+            color: white;
+            padding: var(--spacing-xl) 0 0;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .footer-text {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo img {
+            border-radius: var(--radius-sm);
+        }
+
+        .footer-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-list li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-list a {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-list a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .contact-item i {
+            color: var(--primary-light);
+            width: 25px;
+        }
+
+        .input-group {
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-group .form-control {
+            border: none;
+            padding: 0.75rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .input-group .form-control:focus {
+            background: rgba(255, 255, 255, 0.15);
+            outline: none;
+            box-shadow: 0 0 0 2px var(--primary);
+        }
+
+        .input-group .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .input-group .btn {
+            border-radius: 0 20px 20px 0;
+            background: var(--primary);
+            color: white;
+            border: none;
+        }
+
+        .input-group .btn:hover {
+            background: var(--secondary);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 2rem;
+            padding: 1.5rem 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .footer-scroll {
+            position: absolute;
+            top: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+        }
+
+        .footer-scroll .scroll-link {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(6px);
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .footer-scroll .scroll-link:hover {
+            transform: scale(1.12);
+            background: rgba(255, 255, 255, 0.28);
+            color: var(--primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .navbar-nav {
+                padding: 1rem 0;
+            }
+            
+            .d-flex.ms-lg-3 {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .filter-form {
+                flex-direction: column;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .category-pills {
+                overflow-x: auto;
+                padding-bottom: 10px;
+                justify-content: flex-start;
+            }
+
+            .category-pill {
+                white-space: nowrap;
+            }
+            
+            .footer {
+                text-align: center;
+            }
+            
+            .footer-logo {
+                justify-content: center;
+            }
+            
+            .footer-list a {
+                justify-content: center;
+            }
+            
+            .contact-item {
+                justify-content: center;
+            }
+            
+            .social-icons {
+                margin-top: 1rem;
+            }
+            
+            .footer-bottom .row > div {
+                text-align: center !important;
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .footer-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .footer-scroll {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation - Exactly like index.html -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="images/logo.png" alt="Stack Academy Logo" width="50" height="50" class="d-inline-block align-text-top me-2">
+                <span class="brand-text">Stack Academy</span>
+            </a>
+            
+            <button class="navbar-toggler" 
+                    type="button" 
+                    data-bs-toggle="collapse" 
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="paths.html">Paths</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="courses.html">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                
+                <div class="d-flex ms-lg-3">
+                    <button class="btn btn-icon" aria-label="Search">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <div class="dropdown">
+                        <button class="btn btn-icon ms-2" data-bs-toggle="dropdown" aria-label="User Profile">
+                            <img src="images/default-avatar.png" alt="User" class="user-avatar" id="navUserAvatar">
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="profile.html"><i class="fas fa-user me-2"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="dashboard.html"><i class="fas fa-tachometer-alt me-2"></i>Dashboard</a></li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-danger" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                        </ul>
+                    </div>
+                    <a href="cart.html" class="btn btn-icon ms-2 position-relative" aria-label="Shopping Cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-badge">3</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Explore Our Courses</h1>
+            <p>Choose from 100+ industry-relevant courses and start your journey today</p>
+        </div>
+    </section>
+
+    <!-- Search and Filter Section -->
+    <section class="filter-section">
+        <div class="container">
+            <form class="filter-form" id="filterForm">
+                <div class="filter-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search courses..." id="searchInput">
+                </div>
+                
+                <div class="filter-group">
+                    <i class="fas fa-folder"></i>
+                    <select id="categorySelect">
+                        <option value="">All Categories</option>
+                        <option value="frontend">Frontend Development</option>
+                        <option value="backend">Backend Development</option>
+                        <option value="fullstack">Full Stack</option>
+                        <option value="database">Database</option>
+                        <option value="devops">DevOps</option>
+                        <option value="mobile">Mobile Development</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <i class="fas fa-signal"></i>
+                    <select id="levelSelect">
+                        <option value="">All Levels</option>
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <i class="fas fa-tag"></i>
+                    <select id="priceSelect">
+                        <option value="">All Prices</option>
+                        <option value="free">Free</option>
+                        <option value="paid">Paid</option>
+                        <option value="under50">Under $50</option>
+                        <option value="50to100">$50 - $100</option>
+                        <option value="over100">Over $100</option>
+                    </select>
+                </div>
+                
+                <button type="submit" class="search-btn">
+                    <i class="fas fa-filter me-2"></i>Filter
+                </button>
+            </form>
+
+            <!-- Active Filters -->
+            <div class="active-filters" id="activeFilters">
+                <span class="filter-tag">
+                    Frontend <i class="fas fa-times"></i>
+                </span>
+                <span class="filter-tag">
+                    Beginner <i class="fas fa-times"></i>
+                </span>
+                <span class="filter-tag">
+                    Free <i class="fas fa-times"></i>
+                </span>
+                <a href="#" class="clear-all">Clear All</a>
+            </div>
+
+            <!-- Category Pills -->
+            <div class="category-pills">
+                <span class="category-pill active">
+                    <i class="fas fa-code"></i> All Courses
+                </span>
+                <span class="category-pill">
+                    <i class="fab fa-react"></i> Frontend
+                </span>
+                <span class="category-pill">
+                    <i class="fas fa-server"></i> Backend
+                </span>
+                <span class="category-pill">
+                    <i class="fas fa-layer-group"></i> Full Stack
+                </span>
+                <span class="category-pill">
+                    <i class="fas fa-database"></i> Database
+                </span>
+                <span class="category-pill">
+                    <i class="fas fa-cloud"></i> DevOps
+                </span>
+                <span class="category-pill">
+                    <i class="fas fa-mobile-alt"></i> Mobile
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="section-padding">
+        <div class="container">
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    <strong>156</strong> courses found
+                </div>
+                <div class="sort-options">
+                    <select class="sort-select" id="sortSelect">
+                        <option value="popular">Most Popular</option>
+                        <option value="newest">Newest First</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Courses Grid -->
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Course Card 1 -->
+                <div class="course-card">
+                    <span class="course-badge bestseller">Bestseller</span>
+                    <div class="course-img">
+                        <img src="images/js.png" alt="JavaScript Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Frontend Development</div>
+                        <h4>The Complete JavaScript Course 2025</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor1.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">John Smith</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-value">4.8</span>
+                            <span class="reviews-count">(15.2k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 45 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> All Levels</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                <small>$94.99</small>
+                                $49.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="course-card">
+                    <span class="course-badge hot">Hot</span>
+                    <div class="course-img">
+                        <img src="images/react.png" alt="React Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Frontend Development</div>
+                        <h4>React - The Complete Guide (with Hooks)</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor2.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Sarah Johnson</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-value">5.0</span>
+                            <span class="reviews-count">(22.1k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 52 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Intermediate</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                <small>$104.99</small>
+                                $69.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="course-card">
+                    <span class="course-badge new">New</span>
+                    <div class="course-img">
+                        <img src="images/python2.jpg" alt="Python Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Backend Development</div>
+                        <h4>Python for Data Science and Machine Learning</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor3.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Dr. Michael Chen</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-value">4.9</span>
+                            <span class="reviews-count">(8.3k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 38 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $84.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 4 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="images/node.png" alt="Node.js Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Backend Development</div>
+                        <h4>Node.js API Masterclass with Express</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor4.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">David Wilson</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-value">4.7</span>
+                            <span class="reviews-count">(11.2k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 32 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Intermediate</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $59.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 5 -->
+                <div class="course-card">
+                    <span class="course-badge bestseller">Bestseller</span>
+                    <div class="course-img">
+                        <img src="images/mongo.png" alt="MongoDB Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Database</div>
+                        <h4>MongoDB - The Complete Developer's Guide</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor5.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Emma Davis</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-value">4.9</span>
+                            <span class="reviews-count">(14.5k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 28 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $44.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 6 -->
+                <div class="course-card">
+                    <span class="course-badge hot">Hot</span>
+                    <div class="course-img">
+                        <img src="images/angular.png" alt="Angular Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Frontend Development</div>
+                        <h4>Angular 15 - The Complete Guide</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor6.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Alex Turner</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-value">4.7</span>
+                            <span class="reviews-count">(9.8k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 42 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Intermediate</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                <small>$89.99</small>
+                                $54.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 7 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="images/docker2.png" alt="Docker Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">DevOps</div>
+                        <h4>Docker and Kubernetes: The Complete Guide</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor7.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Robert Brown</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-value">4.8</span>
+                            <span class="reviews-count">(7.2k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 25 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $49.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 8 -->
+                <div class="course-card">
+                    <span class="course-badge new">New</span>
+                    <div class="course-img">
+                        <img src="images/next.png" alt="Next.js Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Full Stack</div>
+                        <h4>Next.js 14 - The Complete Guide</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor8.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">Lisa Wang</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-value">4.6</span>
+                            <span class="reviews-count">(2.1k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 35 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Intermediate</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                <small>$79.99</small>
+                                $39.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 9 -->
+                <div class="course-card">
+                    <div class="course-img">
+                        <img src="images/sql.png" alt="SQL Course">
+                    </div>
+                    <div class="course-content">
+                        <div class="course-category">Database</div>
+                        <h4>SQL and PostgreSQL: The Complete Developer's Guide</h4>
+                        <div class="course-instructor">
+                            <img src="images/instructor9.jpg" alt="Instructor" class="instructor-img">
+                            <span class="instructor-name">James Miller</span>
+                        </div>
+                        <div class="course-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-value">4.9</span>
+                            <span class="reviews-count">(12.3k reviews)</span>
+                        </div>
+                        <div class="course-meta">
+                            <span class="meta-item"><i class="far fa-clock"></i> 22 hours</span>
+                            <span class="meta-item"><i class="fas fa-signal"></i> Beginner</span>
+                            <span class="meta-item"><i class="fas fa-globe"></i> English</span>
+                        </div>
+                        <div class="course-footer">
+                            <div class="course-price">
+                                $34.99
+                            </div>
+                            <a href="course-detail.html" class="enroll-btn">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <a href="#" class="page-item next-prev"><i class="fas fa-chevron-left"></i> Prev</a>
+                <a href="#" class="page-item active">1</a>
+                <a href="#" class="page-item">2</a>
+                <a href="#" class="page-item">3</a>
+                <a href="#" class="page-item">4</a>
+                <a href="#" class="page-item">5</a>
+                <a href="#" class="page-item next-prev">Next <i class="fas fa-chevron-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <h2>Never Miss a New Course</h2>
+            <p>Subscribe to our newsletter and get notified about new courses and exclusive offers.</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Enter your email address">
+                <button type="submit">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer - Exactly like index.html -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-main">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="footer-about">
+                        <h3 class="footer-title">Our Vision</h3>
+                        <p class="footer-text">Learn Full Stack Web Development with modern frameworks and practical projects. We believe in hands-on learning and real-world application.</p>
+                        <div class="footer-logo mt-4 d-flex align-items-center">
+                            <img src="images/logo.png" alt="Stack Academy Logo" width="60" height="60">
+                            <span class="brand-text ms-2">Stack Academy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <div class="footer-links">
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-list">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="paths.html">Paths</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="services.html">Services</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-contact">
+                        <h4 class="footer-title">Contact Us</h4>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-envelope me-3"></i>
+                            <span>support@stackacademy.com</span>
+                        </div>
+                        <div class="contact-item mb-3">
+                            <i class="fas fa-phone me-3"></i>
+                            <span>+962 79252 2004</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt me-3"></i>
+                            <span>Amman, Jordan</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="footer-newsletter">
+                        <h4 class="footer-title">Newsletter</h4>
+                        <p class="footer-text">Subscribe to get updates on new courses and offers.</p>
+                        <div class="input-group mt-3">
+                            <input type="email" class="form-control" placeholder="Your email">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom py-4">
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start">
+                        <p class="mb-0">© 2025 Stack Academy. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="social-icons">
+                            <a href="#" class="social-icon" aria-label="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon" aria-label="YouTube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll to Top Button -->
+        <div class="scroll-indicator footer-scroll">
+            <a href="#" class="scroll-link">
+                <i class="fas fa-chevron-up"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Check if user is logged in
+        document.addEventListener("DOMContentLoaded", () => {
+            const token = localStorage.getItem('token');
+            const user = localStorage.getItem('user');
+            
+            if (token && user) {
+                try {
+                    const userData = JSON.parse(user);
+                    if (userData.avatar) {
+                        document.getElementById('navUserAvatar').src = userData.avatar;
+                    }
+                } catch (error) {
+                    console.error('Error loading user data:', error);
+                }
+            }
+        });
+
+        // Filter functionality
+        document.getElementById('filterForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Implement filter logic here
+            console.log('Filter applied');
+        });
+
+        // Search functionality
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            // Implement search logic here
+            console.log('Searching for:', searchTerm);
+        });
+
+        // Sort functionality
+        document.getElementById('sortSelect').addEventListener('change', function(e) {
+            const sortValue = e.target.value;
+            // Implement sort logic here
+            console.log('Sorting by:', sortValue);
+        });
+
+        // Category pills click
+        document.querySelectorAll('.category-pill').forEach(pill => {
+            pill.addEventListener('click', function() {
+                document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                // Implement category filter logic here
+                console.log('Category selected:', this.textContent.trim());
+            });
+        });
+
+        // Clear filters
+        document.querySelector('.clear-all').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('searchInput').value = '';
+            document.getElementById('categorySelect').value = '';
+            document.getElementById('levelSelect').value = '';
+            document.getElementById('priceSelect').value = '';
+            document.querySelectorAll('.filter-tag').forEach(tag => tag.remove());
+        });
+
+        // Remove individual filter tag
+        document.querySelectorAll('.filter-tag i').forEach(closeIcon => {
+            closeIcon.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                localStorage.removeItem('rememberEmail');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+    <!-- courses.html - Add to your existing courses page -->
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadCourses();
+    setupFilters();
+});
+
+async function loadCourses() {
+    try {
+        // Get filter values from URL or state
+        const category = getFilterValue('category');
+        const level = getFilterValue('level');
+        const page = getFilterValue('page') || 1;
+        
+        // Build query string
+        let query = `?page=${page}&limit=9`;
+        if (category) query += `&category=${category}`;
+        if (level) query += `&level=${level}`;
+        
+        // Fetch courses from backend
+        const response = await api.get(`/courses${query}`);
+        
+        // Update UI
+        displayCourses(response.data);
+        updatePagination(response.total, response.count, page);
+        
+    } catch (error) {
+        console.error('Failed to load courses:', error);
+    }
+}
+
+function displayCourses(courses) {
+    const container = document.getElementById('coursesGrid');
+    container.innerHTML = '';
+    
+    courses.forEach(course => {
+        container.innerHTML += `
+            <div class="course-card">
+                ${course.isBestseller ? '<span class="course-badge bestseller">Bestseller</span>' : ''}
+                ${course.isHot ? '<span class="course-badge hot">Hot</span>' : ''}
+                ${course.isNew ? '<span class="course-badge new">New</span>' : ''}
+                <div class="course-img">
+                    <img src="images/${course.thumbnail}" alt="${course.title}">
+                </div>
+                <div class="course-content">
+                    <div class="course-category">${course.category}</div>
+                    <h4>${course.title}</h4>
+                    <div class="course-instructor">
+                        <img src="images/${course.instructor.avatar}" alt="${course.instructor.firstName}" class="instructor-img">
+                        <span class="instructor-name">${course.instructor.firstName} ${course.instructor.lastName}</span>
+                    </div>
+                    <div class="course-rating">
+                        <div class="stars">
+                            ${generateStars(course.rating)}
+                        </div>
+                        <span class="rating-value">${course.rating}</span>
+                        <span class="reviews-count">(${course.totalRatings} reviews)</span>
+                    </div>
+                    <div class="course-meta">
+                        <span class="meta-item"><i class="far fa-clock"></i> ${course.duration.hours} hours</span>
+                        <span class="meta-item"><i class="fas fa-signal"></i> ${course.level}</span>
+                    </div>
+                    <div class="course-footer">
+                        <div class="course-price">
+                            ${course.discountPrice ? `<small>$${course.price}</small> $${course.discountPrice}` : `$${course.price}`}
+                        </div>
+                        <button class="enroll-btn" onclick="viewCourse('${course._id}')">View Course</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    });
+}
+
+function generateStars(rating) {
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        if (i <= Math.floor(rating)) {
+            stars += '<i class="fas fa-star"></i>';
+        } else if (i - 0.5 <= rating) {
+            stars += '<i class="fas fa-star-half-alt"></i>';
+        } else {
+            stars += '<i class="far fa-star"></i>';
+        }
+    }
+    return stars;
+}
+
+function viewCourse(courseId) {
+    window.location.href = `course-detail.html?id=${courseId}`;
+}
+
+function setupFilters() {
+    // Category filter
+    document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.addEventListener('click', function() {
+            const category = this.textContent.trim();
+            updateFilter('category', category);
+            loadCourses();
+        });
+    });
+    
+    // Search input
+    document.getElementById('searchInput').addEventListener('keyup', debounce(function(e) {
+        const search = e.target.value;
+        updateFilter('search', search);
+        loadCourses();
+    }, 500));
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+function getFilterValue(key) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(key);
+}
+
+function updateFilter(key, value) {
+    const url = new URL(window.location);
+    if (value) {
+        url.searchParams.set(key, value);
+    } else {
+        url.searchParams.delete(key);
+    }
+    window.history.pushState({}, '', url);
+}
+</script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>

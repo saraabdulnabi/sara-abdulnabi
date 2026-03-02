@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login - Stack Academy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
+        --primary: #E47C9C;
+        --primary-dark: #D16488;
+        --primary-light: #F6A0AC;
+        --secondary: #71C7FE;
+        --accent: #908DCE;
+        --dark: #2C3E50;
+        --light: #FFFFFF;
+        --gray: #6c757d;
+    }
+
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #E47C9C, #908DCE);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeInBody 1s ease;
+        padding: 15px;
+    }
+
+    @keyframes fadeInBody {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .login-wrapper {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        padding: 35px;
+        border-radius: 20px;
+        width: 780px;
+        max-width: 95%;
+        display: flex;
+        gap: 30px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+        animation: slideUp 0.8s ease;
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(40px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .login-left {
+        flex: 1;
+        background: #ffffff;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.03);
+    }
+
+    .login-left img {
+        max-width: 85%;
+        transition: transform 0.4s ease;
+    }
+
+    .login-left img:hover {
+        transform: scale(1.05);
+    }
+
+    .login-right {
+        flex: 1;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 35px 30px;
+        box-shadow: inset 0 0 20px rgba(0,0,0,0.02);
+    }
+
+    .login-right h3 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: var(--accent);
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        font-size: 14px;
+        margin-bottom: 6px;
+        color: var(--dark);
+    }
+
+    .login-right .form-control {
+        border-radius: 25px;
+        font-size: 14px;
+        border: 1.5px solid #e0e0e0;
+        padding: 12px 18px;
+        transition: all 0.3s ease;
+    }
+
+    .login-right .form-control:focus {
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px rgba(228, 124, 156, 0.15);
+        transform: scale(1.02);
+        outline: none;
+    }
+
+    .login-btn {
+        width: 100%;
+        border-radius: 30px;
+        background: linear-gradient(135deg, var(--primary), var(--accent));
+        color: #fff;
+        border: none;
+        padding: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        cursor: pointer;
+    }
+
+    .login-btn:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.25);
+    }
+
+    .login-btn:active {
+        transform: scale(0.97);
+    }
+
+    .login-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+
+    .login-footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 13px;
+        color: var(--gray);
+    }
+
+    .login-footer a {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .login-footer a:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        border-radius: 20px;
+        font-size: 14px;
+        padding: 12px 15px;
+        margin-bottom: 20px;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-danger {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .alert-info {
+        background-color: #d1ecf1;
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+    }
+
+    .password-toggle {
+        position: relative;
+    }
+
+    .password-toggle-icon {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: var(--gray);
+        transition: 0.3s ease;
+        z-index: 10;
+    }
+
+    .password-toggle-icon:hover {
+        color: var(--primary);
+    }
+
+    .form-check-input:checked {
+        background-color: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(255,255,255,.3);
+        border-radius: 50%;
+        border-top-color: #fff;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 12px;
+        margin-top: 4px;
+        display: none;
+    }
+
+    .is-invalid {
+        border-color: #dc3545 !important;
+    }
+
+    /* Responsive improvement */
+    @media (max-width: 768px) {
+        .login-wrapper {
+            flex-direction: column;
+            width: 95%;
+            padding: 20px;
+        }
+
+        .login-left {
+            display: none;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+    <div class="login-left">
+        <img src="images/logo.png" alt="Stack Academy Logo">
+    </div>
+
+    <div class="login-right">
+        <h3>LOGIN</h3>
+
+        <!-- Message container for alerts -->
+        <div id="messageContainer"></div>
+
+        <!-- Connection status indicator (for debugging) -->
+        <div id="connectionStatus" style="display: none;" class="alert alert-info">
+            Checking connection to backend...
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" value="" autocomplete="email">
+            <div class="invalid-feedback" id="emailError"></div>
+        </div>
+
+        <div class="mb-3 password-toggle">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your password" value="" autocomplete="current-password">
+            <i class="fas fa-eye password-toggle-icon" onclick="togglePassword()"></i>
+            <div class="invalid-feedback" id="passwordError"></div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="remember">
+                <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <a href="#" onclick="showForgotPassword()" style="font-size:13px;color:var(--accent);">Forgot password?</a>
+        </div>
+
+        <button class="login-btn" id="loginBtn" onclick="handleLogin(event)">Login</button>
+
+        <div class="login-footer">
+            Don't have an account? <a href="register.html">Sign up</a>
+        </div>
+
+        <!-- Debug info (hidden by default) -->
+        <div id="debugInfo" style="margin-top: 20px; font-size: 12px; color: #999; display: none;">
+            <hr>
+            <p><strong>Debug Info:</strong></p>
+            <p>Backend URL: <span id="debugUrl"></span></p>
+            <p>Status: <span id="debugStatus">Checking...</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+// API URL - Connect to your backend
+const API_URL = 'http://localhost:5000/api'; // Updated to port 5000 where your backend runs
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Check if user is already logged in
+    checkAuthStatus();
+    
+    // Load remembered email if exists
+    loadRememberedEmail();
+    
+    // Add event listeners
+    setupEventListeners();
+    
+    // Check backend connection
+    checkBackendConnection();
+});
+
+function setupEventListeners() {
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+
+    // Remove red border while typing
+    emailInput.addEventListener("input", () => clearFieldError('email'));
+    passwordInput.addEventListener("input", () => clearFieldError('password'));
+
+    // Allow Enter key to submit
+    emailInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin(e);
+    });
+    passwordInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") handleLogin(e);
+    });
+}
+
+// Check if user is already authenticated
+function checkAuthStatus() {
+    const token = localStorage.getItem('token');
+    if (token) {
+        // Optional: Verify token with backend
+        // For now, just redirect to dashboard
+        window.location.href = 'dashboard.html';
+    }
+}
+
+// Load remembered email from localStorage
+function loadRememberedEmail() {
+    const rememberedEmail = localStorage.getItem('rememberEmail');
+    const rememberCheckbox = document.getElementById('remember');
+    
+    if (rememberedEmail) {
+        document.getElementById('email').value = rememberedEmail;
+        rememberCheckbox.checked = true;
+    }
+}
+
+// Check if backend is reachable
+async function checkBackendConnection() {
+    try {
+        const response = await fetch('http://localhost:5000/health');
+        const data = await response.json();
+        console.log('Backend connection successful:', data);
+        
+        // Update debug info if visible
+        document.getElementById('debugUrl').textContent = API_URL;
+        document.getElementById('debugStatus').textContent = 'Connected ✓';
+        document.getElementById('debugStatus').style.color = 'green';
+    } catch (error) {
+        console.error('Backend connection failed:', error);
+        
+        // Show warning but don't block login
+        showMessage('Warning: Cannot connect to backend server. Make sure it\'s running on port 5000.', 'info');
+        
+        // Update debug info
+        document.getElementById('debugUrl').textContent = API_URL;
+        document.getElementById('debugStatus').textContent = 'Disconnected ✗';
+        document.getElementById('debugStatus').style.color = 'red';
+    }
+}
+
+// Toggle password visibility
+function togglePassword() {
+    const passwordInput = document.getElementById('password');
+    const icon = document.querySelector('.password-toggle-icon');
+    
+    if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordInput.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+// Handle login form submission with REAL backend
+async function handleLogin(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const remember = document.getElementById("remember").checked;
+    const loginBtn = document.getElementById("loginBtn");
+
+    // Clear previous errors
+    clearAllErrors();
+
+    // Frontend validation
+    if (!validateForm(email, password)) {
+        return;
+    }
+
+    // Show loading state
+    loginBtn.disabled = true;
+    loginBtn.innerHTML = '<span class="spinner"></span> Logging in...';
+
+    try {
+        console.log('Attempting login with:', { email, password: '***' });
+        
+        // REAL API CALL to your backend
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+        console.log('Login response:', data);
+
+        if (data.success) {
+            // Store token and user data from backend
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            // Handle remember me
+            if (remember) {
+                localStorage.setItem('rememberEmail', email);
+            } else {
+                localStorage.removeItem('rememberEmail');
+            }
+
+            // Show success message
+            showMessage('Login successful! Redirecting...', 'success');
+            
+            // Redirect to dashboard
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        } else {
+            // Show error from backend
+            showMessage(data.message || 'Login failed', 'error');
+            
+            // Handle validation errors if any
+            if (data.errors) {
+                data.errors.forEach(error => {
+                    if (error.path === 'email') {
+                        showFieldError('email', error.msg);
+                    } else if (error.path === 'password') {
+                        showFieldError('password', error.msg);
+                    }
+                });
+            }
+        }
+    } catch (error) {
+        console.error('Login error:', error);
+        
+        // More specific error messages
+        if (error.message.includes('Failed to fetch')) {
+            showMessage('Cannot connect to backend server. Make sure it\'s running on port 5000.', 'error');
+        } else {
+            showMessage('Network error: ' + error.message, 'error');
+        }
+    } finally {
+        // Reset button state
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = 'Login';
+    }
+}
+
+// Validate form fields
+function validateForm(email, password) {
+    let isValid = true;
+
+    // Email validation
+    if (!email) {
+        showFieldError('email', 'Email is required');
+        isValid = false;
+    } else {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailPattern.test(email)) {
+            showFieldError('email', 'Please enter a valid email address');
+            isValid = false;
+        }
+    }
+
+    // Password validation
+    if (!password) {
+        showFieldError('password', 'Password is required');
+        isValid = false;
+    } else if (password.length < 6) {
+        showFieldError('password', 'Password must be at least 6 characters');
+        isValid = false;
+    }
+
+    return isValid;
+}
+
+// Show field-specific error
+function showFieldError(fieldId, message) {
+    const field = document.getElementById(fieldId);
+    const errorDiv = document.getElementById(`${fieldId}Error`);
+    
+    if (field && errorDiv) {
+        field.classList.add('is-invalid');
+        field.style.border = '2px solid #dc3545';
+        errorDiv.textContent = message;
+        errorDiv.style.display = 'block';
+    }
+}
+
+// Clear field error
+function clearFieldError(fieldId) {
+    const field = document.getElementById(fieldId);
+    const errorDiv = document.getElementById(`${fieldId}Error`);
+    
+    if (field && errorDiv) {
+        field.classList.remove('is-invalid');
+        field.style.border = '2px solid #e0e0e0';
+        errorDiv.textContent = '';
+        errorDiv.style.display = 'none';
+    }
+}
+
+// Clear all errors
+function clearAllErrors() {
+    ['email', 'password'].forEach(fieldId => {
+        clearFieldError(fieldId);
+    });
+    
+    // Clear message container
+    const messageContainer = document.getElementById('messageContainer');
+    messageContainer.innerHTML = '';
+}
+
+// Show general message
+function showMessage(text, type) {
+    const messageContainer = document.getElementById('messageContainer');
+    const alertClass = type === 'success' ? 'alert-success' : 
+                       type === 'error' ? 'alert-danger' : 'alert-info';
+    
+    messageContainer.innerHTML = `
+        <div class="alert ${alertClass}">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-info-circle'} me-2"></i>
+            ${text}
+        </div>
+    `;
+    
+    // Auto-hide success messages after 5 seconds
+    if (type === 'success') {
+        setTimeout(() => {
+            messageContainer.innerHTML = '';
+        }, 5000);
+    }
+}
+
+// Forgot password functionality
+function showForgotPassword() {
+    const email = document.getElementById('email').value.trim();
+    
+    if (email) {
+        showMessage(`Password reset link has been sent to ${email}`, 'success');
+    } else {
+        showMessage('Please enter your email address to reset password', 'info');
+    }
+}
+
+// Go to register page
+function goToRegister() {
+    window.location.href = 'register.html';
+}
+
+// Toggle debug info (hold Shift and click on logo to show)
+let debugClickCount = 0;
+document.querySelector('.login-left').addEventListener('click', function(e) {
+    if (e.shiftKey) {
+        debugClickCount++;
+        if (debugClickCount >= 3) {
+            document.getElementById('debugInfo').style.display = 'block';
+            document.getElementById('debugUrl').textContent = API_URL;
+            debugClickCount = 0;
+        }
+    }
+});
+</script>
+<!-- Keep your existing script includes -->
+<script src="script.js"></script>
+<script src="js/api.js"></script>
+</body>
+</html>
