@@ -10,8 +10,6 @@
 
 Turning creativity into code and ideas into meaningful projects.
 
-[GitHub](https://github.com/sara-abdulnabi) 
-
 </div>
 
 ---
