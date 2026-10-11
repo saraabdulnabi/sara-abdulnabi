@@ -2,8 +2,6 @@
 
 <img src="assets/banner.jpg" width="100%" alt="Sara's Banner" />
 
-<img src="assets/logo (2).jpg" width="130" alt="Sara's Profile" />
-
 # Sara Abdulnabi 🌸
 
 ### Computer Science | Software Development
