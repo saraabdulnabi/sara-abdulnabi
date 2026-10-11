@@ -1,8 +1,8 @@
  <div align="center">
 
-<img src="assets/banner.png" width="100%" alt="Sara's pink floral banner" />
+<img src="assets/banner.jpg" width="100%" alt="Sara's Banner" />
 
-<img src="assets/logo(2).png" width="130" alt="Sara's floral logo" />
+<img src="assets/logo (2).jpg" width="130" alt="Sara's Profile" />
 
 # Sara Abdulnabi 🌸
 
