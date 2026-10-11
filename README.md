@@ -2,7 +2,7 @@
 
 <img src="assets/banner.png" width="100%" alt="Sara's pink floral banner" />
 
-<img src="assets/logo.png" width="130" alt="Sara's floral logo" />
+<img src="assets/logo(2).png" width="130" alt="Sara's floral logo" />
 
 # Sara Abdulnabi 🌸
 
@@ -33,18 +33,10 @@ I'm Sara, passionate about Computer Science, software development, and continuou
 ## 🛠️ Skills & Technologies
 
 *The technologies I'm learning and working with:*
-
-<!-- Add your actual programming languages and tools here. -->
-
-`Add your programming languages here`
+HTML, CSS, JavaScript, TypeScript, Nest.js , C# , OracleDB
 
 ## 💖 Featured Projects
 
-*Here are some projects I'm building and learning from.*
-
-- 🌸 **Project One** — Add a short description of your project.
-- 💻 **Project Two** — Explain what you created and what you learned.
-- 🚀 **Project Three** — Showcase another project you're proud of.
 
 ## 🌱 My Philosophy
 
